@@ -75,7 +75,7 @@ public class PersonDAO {
 			if (rs.next()) {
 				return new Person(rs.getInt("id_person"), rs.getString("name"), rs.getString("password"),
 						rs.getString("role"), rs.getString("phone"), rs.getString("email"), rs.getString("CCCD"),
-						rs.getBoolean("gender"), rs.getString("address"), rs.getDate("dob"));
+						rs.getBoolean("gender"), rs.getString("address"), rs.getDate("dob"),rs.getString("img"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

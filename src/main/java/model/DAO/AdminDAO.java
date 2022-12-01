@@ -14,13 +14,13 @@ public class AdminDAO {
 	private static final String GET_ADMIN_BY_ID = "SELECT * FROM admin LEFT JOIN person ON "
 			+ "admin.id_admin = person.id_person where id_admin=?;";
 	private static final String GET_ADMINVIEW_BY_ID = "SELECT person.id_person,name,role,phone,email,CCCD,gender"
-			+ ",address,dob,admin_salary FROM admin LEFT JOIN person ON admin.id_admin = person.id_person "
+			+ ",address,dob,img,admin_salary FROM admin LEFT JOIN person ON admin.id_admin = person.id_person "
 			+ "where id_admin=?;";
 	private static final String UPDATE_ADMIN = "UPDATE admin "
 			+ "SET admin_salary=? "
 			+ "WHERE id_admin=?;";
 	private static final String GET_ALL_ADMIN = "SELECT person.id_person,name,role,phone,email,CCCD,gender"
-			+ ",address,dob,admin_salary FROM admin LEFT JOIN person ON "
+			+ ",address,dob,img,admin_salary FROM admin LEFT JOIN person ON "
 			+ "admin.id_admin = person.id_person where "
 			+ "admin.id_admin=? or name like N? or phone like ? or email like ? or "
 			+ "CCCD like ? or address like N? or dob like N? or admin_salary like N?;";
@@ -59,7 +59,7 @@ public class AdminDAO {
 			while(rs.next()) {
 				result.add(new AdminView(rs.getInt("id_person"), rs.getString("name")
 					,rs.getString("role"),rs.getString("phone"),rs.getString("email"),rs.getString("CCCD")
-					,rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getInt("admin_salary")));
+					,rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getString("img"),rs.getInt("admin_salary")));
 			}
 		}
 		catch(Exception ex) {
@@ -78,7 +78,7 @@ public class AdminDAO {
 			while(rs.next()) {
 				return new Admin(rs.getInt("id_student"), rs.getString("name"),rs.getString("password")
 					,rs.getString("role"),rs.getString("phone"),rs.getString("email"),rs.getString("CCCD")
-					,rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getInt("admin_salary"));
+					,rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getString("img"),rs.getInt("admin_salary"));
 			}
 		}
 		catch(Exception ex) {
@@ -97,7 +97,7 @@ public class AdminDAO {
 			while(rs.next()) {
 				return new AdminView(rs.getInt("id_person"), rs.getString("name")
 					,rs.getString("role"),rs.getString("phone"),rs.getString("email"),rs.getString("CCCD")
-					,rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getInt("admin_salary"));
+					,rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getString("img"),rs.getInt("admin_salary"));
 			}
 		}
 		catch(Exception ex) {

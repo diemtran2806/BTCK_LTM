@@ -13,6 +13,7 @@ public class StudentView {
     private String address;
     private Date dob;
     private String class_name;
+    private String img;
     public int getId_person() {
 		return id_person;
 	}
@@ -20,8 +21,7 @@ public class StudentView {
 		this.id_person = id_person;
 	}
 	public StudentView(int id_person, String name, String role, String phone, String email, String cCCD, boolean gender,
-			String address, Date dob, String class_name) {
-		super();
+			String address, Date dob, String img, String class_name) {
 		this.id_person = id_person;
 		this.name = name;
 		this.role = role;
@@ -32,6 +32,7 @@ public class StudentView {
 		this.address = address;
 		this.dob = dob;
 		this.class_name = class_name;
+		this.img = img;
 	}
 	public String getName() {
 		return name;
@@ -86,5 +87,11 @@ public class StudentView {
 	}
 	public void setClass_name(String class_name) {
 		this.class_name = class_name;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
 	}
 }

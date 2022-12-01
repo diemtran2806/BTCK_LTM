@@ -111,12 +111,13 @@ public class StudentServlet extends HttpServlet {
 		String gender = request.getParameter("gender");
 		String address = request.getParameter("address");
 		String dob = request.getParameter("dob");
+		String img = request.getParameter("img");
 		String id_role = request.getParameter("id_role");
 		ArrayList<StudentView> studentList = null;
 
 		try {
 			if (StudentBO.createStudent(new Student(0, name, password, role, phone, email, cccd, gender.equals("1"),
-					address, Date.valueOf(dob), Integer.parseInt(id_role)))) {
+					address, Date.valueOf(dob),img, Integer.parseInt(id_role)))) {
 				response.sendRedirect("./viewlist");
 			} else {
 				request.setAttribute("error", "Something went wrong!");
@@ -138,12 +139,13 @@ public class StudentServlet extends HttpServlet {
 		String gender = request.getParameter("gender");
 		String address = request.getParameter("address");
 		String dob = request.getParameter("dob");
+		String img = request.getParameter("img");
 		String id_role = request.getParameter("id_role");
 		ArrayList<StudentView> studentList = null;
 
 		try {
 			if (StudentBO.updateStudent(new Student(Integer.parseInt(id), name, password, role, phone, email, cccd,
-					gender.equals("1"), address, Date.valueOf(dob), Integer.parseInt(id_role)))) {
+					gender.equals("1"), address, Date.valueOf(dob),img, Integer.parseInt(id_role)))) {
 				response.sendRedirect("./viewlist");
 			} else {
 				request.setAttribute("error", "Something went wrong!");

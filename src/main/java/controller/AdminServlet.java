@@ -107,12 +107,13 @@ public class AdminServlet extends HttpServlet {
 		String gender = request.getParameter("gender");
 		String address = request.getParameter("address");
 		String dob = request.getParameter("dob");
+		String img = request.getParameter("img");
 		String salary = request.getParameter("salary");
 		ArrayList<AdminView> adminList = null;
 
 		try {
 			if (AdminBO.createAdmin(new Admin(0, name, password, role, phone, email, cccd, gender.equals("1"), address,
-					Date.valueOf(dob), Integer.parseInt(salary)))) {
+					Date.valueOf(dob),img, Integer.parseInt(salary)))) {
 				response.sendRedirect("./viewlist");
 			} else {
 				request.setAttribute("error", "Something went wrong!");
@@ -134,12 +135,13 @@ public class AdminServlet extends HttpServlet {
 		String gender = request.getParameter("gender");
 		String address = request.getParameter("address");
 		String dob = request.getParameter("dob");
+		String img = request.getParameter("img");
 		String salary = request.getParameter("salary");
 		ArrayList<AdminView> adminList = null;
 
 		try {
 			if (AdminBO.updateAdmin(new Admin(Integer.parseInt(id), name, password, role, phone, email, cccd,
-					gender.equals("1"), address, Date.valueOf(dob), Integer.parseInt(salary)))) {
+					gender.equals("1"), address, Date.valueOf(dob),img, Integer.parseInt(salary)))) {
 				response.sendRedirect("./viewlist");
 			} else {
 				request.setAttribute("error", "Something went wrong!");

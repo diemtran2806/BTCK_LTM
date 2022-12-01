@@ -12,9 +12,11 @@ public class Person {
     private String CCCD;
     private boolean gender;
     private String address;
-    private Date dob; 
+    private Date dob;
+    private String img;
+    
 	
-    public Person(int id_person, String name, String password, String role, String phone, String email, String CCCD, boolean gender, String address, Date dob ) {
+    public Person(int id_person, String name, String password, String role, String phone, String email, String CCCD, boolean gender, String address, Date dob, String img) {
         this.id_person = id_person;
         this.name = name;
         this.password = password;
@@ -25,6 +27,7 @@ public class Person {
         this.gender = gender;
         this.address = address;
         this.dob = dob;
+        this.img =  img;
     }
     
 	public int getId_person() {
@@ -86,6 +89,14 @@ public class Person {
 	}
 	public void setDob(Date dob) {
 		this.dob = dob;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 	
 }

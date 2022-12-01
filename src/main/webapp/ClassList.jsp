@@ -84,6 +84,7 @@
 			box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 			margin: auto;
 			background-color: #f2f2f26e;
+			text-align:center;
 		}
 		.btn-add {
 			/* margin-left:32px;

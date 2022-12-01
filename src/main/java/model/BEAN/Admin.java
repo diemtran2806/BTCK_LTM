@@ -5,8 +5,8 @@ import java.sql.Date;
 public class Admin extends Person {
 	private int admin_salary;
 	public Admin(int id_admin, String name, String password, String role, String phone, String email, String CCCD,
-			boolean gender, String address, Date dob, int admin_salary) {
-		super(id_admin, name, password, role, phone, email, CCCD, gender, address, dob);
+			boolean gender, String address, Date dob, String img, int admin_salary) {
+		super(id_admin, name, password, role, phone, email, CCCD, gender, address, dob, img);
 		this.admin_salary = admin_salary;
 	}
 	public int getAdmin_salary() {

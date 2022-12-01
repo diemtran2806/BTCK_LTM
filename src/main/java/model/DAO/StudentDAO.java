@@ -18,18 +18,18 @@ public class StudentDAO {
 	private static final String GET_STUDENT_BY_ID = "SELECT * FROM student LEFT JOIN person ON "
 			+ "student.id_student = person.id_person where id_student=?;";
 	private static final String GET_STUDENTVIEW_BY_ID = "SELECT person.id_person,name,role,phone,email,CCCD,gender"
-			+ ",address,dob,class_name FROM student LEFT JOIN person ON student.id_student = person.id_person "
+			+ ",address,dob,img,class_name FROM student LEFT JOIN person ON student.id_student = person.id_person "
 			+ "LEFT JOIN class on student.id_class=class.id_class where id_student=?;";
 	private static final String UPDATE_STUDENT = "UPDATE student "
 			+ "SET id_class=? "
 			+ "WHERE id_student=?;";
 	private static final String GET_ALL_STUDENT = "SELECT person.id_person,name,role,phone,email,CCCD,gender"
-			+ ",address,dob,class_name FROM student LEFT JOIN person ON "
+			+ ",address,dob,img,class_name FROM student LEFT JOIN person ON "
 			+ "student.id_student = person.id_person LEFT JOIN class on student.id_class=class.id_class where "
 			+ "student.id_student=? or name like N? or phone like ? or email like ? or "
 			+ "CCCD like ? or address like N? or dob like N? or class_name like N?;";
 	private static final String GET_ALL_STUDENT_CLASS = "SELECT person.id_person,name,role,phone,email,CCCD,gender"
-			+ ",address,dob,class_name FROM student LEFT JOIN person ON "
+			+ ",address,dob,img,class_name FROM student LEFT JOIN person ON "
 			+ "student.id_student = person.id_person LEFT JOIN class on student.id_class=class.id_class where "
 			+ "student.id_student=? or name like N? or phone like ? or email like ? or "
 			+ "CCCD like ? or address like N? or dob like N? or class_name like N? WHERE student.id_class=?;";
@@ -69,7 +69,7 @@ public class StudentDAO {
 			while(rs.next()) {
 				result.add(new StudentView(rs.getInt("id_person"), rs.getString("name")
 					,rs.getString("role"),rs.getString("phone"),rs.getString("email"),rs.getString("CCCD")
-					,rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getString("class_name")));
+					,rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getString("img"),rs.getString("class_name")));
 			}
 		}
 		catch(Exception ex) {
@@ -97,7 +97,7 @@ public class StudentDAO {
 			while(rs.next()) {
 				result.add(new StudentView(rs.getInt("id_person"), rs.getString("name")
 					,rs.getString("role"),rs.getString("phone"),rs.getString("email"),rs.getString("CCCD")
-					,rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getString("class_name")));
+					,rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getString("img"),rs.getString("class_name")));
 			}
 		}
 		catch(Exception ex) {
@@ -116,7 +116,7 @@ public class StudentDAO {
 			while(rs.next()) {
 				return new Student(rs.getInt("id_student"), rs.getString("name"),rs.getString("password")
 					,rs.getString("role"),rs.getString("phone"),rs.getString("email"),rs.getString("CCCD")
-					,rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getInt("id_class"));
+					,rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getString("img"),rs.getInt("id_class"));
 			}
 		}
 		catch(Exception ex) {
@@ -135,7 +135,7 @@ public class StudentDAO {
 			while(rs.next()) {
 				return new StudentView(rs.getInt("id_person"), rs.getString("name")
 					,rs.getString("role"),rs.getString("phone"),rs.getString("email"),rs.getString("CCCD")
-					,rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getString("class_name"));
+					,rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getString("img"),rs.getString("class_name"));
 			}
 		}
 		catch(Exception ex) {

@@ -12,9 +12,10 @@ public class AdminView {
     private boolean gender;
     private String address;
     private Date dob;
+    private String img;
 	private int admin_salary;
     public AdminView(int id_person, String name, String role, String phone, String email, String cCCD,
-			boolean gender, String address, Date dob, int admin_salary) {
+			boolean gender, String address, Date dob, String img, int admin_salary) {
 		this.id_person = id_person;
 		this.name = name;
 		this.role = role;
@@ -25,6 +26,7 @@ public class AdminView {
 		this.address = address;
 		this.dob = dob;
 		this.admin_salary = admin_salary;
+		this.setImg(img);
 	}
 	public int getId_person() {
 		return id_person;
@@ -85,5 +87,11 @@ public class AdminView {
 	}
 	public void setAdmin_salary(int admin_salary) {
 		this.admin_salary = admin_salary;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
 	}
 }
