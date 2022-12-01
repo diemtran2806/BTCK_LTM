@@ -56,11 +56,10 @@ public class CheckLoginServlet extends HttpServlet {
 				Person person = PersonBO.getPersonById(id);
 				request.getSession().setAttribute("name", person.getName());
 				request.getSession().setAttribute("role", person.getRole());
-				RequestDispatcher rd = request.getRequestDispatcher("/homePage.jsp");
-				rd.forward(request, response);
+				response.sendRedirect("../Home.jsp");
 			} else {
 				request.setAttribute("error", "Login failed! Please recheck the username and password and try again!");
-				RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("../login.jsp");
 				rd.forward(request, response);
 			}
 		} catch (Exception e) {
@@ -71,8 +70,7 @@ public class CheckLoginServlet extends HttpServlet {
 	private void logout(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			request.getSession().invalidate();
-			RequestDispatcher rd = request.getRequestDispatcher("/homePage.jsp");
-			rd.forward(request, response);
+			response.sendRedirect("../Home.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

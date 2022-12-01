@@ -9,6 +9,9 @@
 <title>List Student</title>
 </head>
 <body>
+	<div class="navbar">
+        <jsp:include page="NavigationBar.jsp"></jsp:include>
+    </div>
 	<form action="<%=request.getContextPath()%>/Student/search"
 		method="post">
 		<table>

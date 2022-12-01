@@ -9,6 +9,9 @@
 <title>Admin List</title>
 </head>
 <body>
+	<div class="navbar">
+        <jsp:include page="NavigationBar.jsp"></jsp:include>
+    </div>
 	<form action="<%=request.getContextPath()%>/Admin/search" method="post">
 		<table>
 			<tr>

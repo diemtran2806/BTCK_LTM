@@ -7,6 +7,9 @@
 <title>Create new admin</title>
 </head>
 <body>
+	<div class="navbar">
+        <jsp:include page="NavigationBar.jsp"></jsp:include>
+    </div>
 	<form action="<%=request.getContextPath()%>/Admin/add" method="post">
 		<table>
 			<tr>

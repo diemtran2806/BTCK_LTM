@@ -9,6 +9,9 @@
 <title>Update student</title>
 </head>
 <body>
+	<div class="navbar">
+        <jsp:include page="NavigationBar.jsp"></jsp:include>
+    </div>
 	<form action="<%=request.getContextPath()%>/Student/update" method="post">
 		<table>
 			<%

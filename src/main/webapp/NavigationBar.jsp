@@ -70,13 +70,13 @@ body {
 	<div class="wrapper">
 		<div class="menu">
 			<div class="wrapper-button">
-				<a href="./Home.jsp" class="text">Trang Chủ</a>
+				<a href="<%=request.getContextPath()%>/Home.jsp" class="text">Trang Chủ</a>
 			</div>
 			<div class="wrapper-button">
 				<a href="FacultyServlet" class="text">Khoa</a>
 			</div>
 			<div class="wrapper-button">
-				<a href="ClassServlet" class="text">Lớp Sinh Hoạt</a>
+				<a href="<%=request.getContextPath()%>/Class/viewlist" class="text">Lớp Sinh Hoạt</a>
 			</div>
 			<div class="wrapper-button">
 				<a href="<%=request.getContextPath()%>/Student/viewlist" class="text">Sinh viên</a>
@@ -90,11 +90,11 @@ body {
 				<%
 				if (session.getAttribute("name") == null) {
 				%>
-				<a href="<%=request.getContextPath()%>/login.jsp">Log in</a>
+				<a href="<%=request.getContextPath()%>/login.jsp" class="text">Log in</a>
 				<%
 				} else {
 				%>
-				<a href="<%=request.getContextPath()%>/Auth/logout">Log out</a>
+				<a href="<%=request.getContextPath()%>/Auth/logout" class="text">Log out</a>
 <!-- 				<p> -->
 <!-- 					Welcome -->
 <%-- 					<%=session.getAttribute("name")%> --%>

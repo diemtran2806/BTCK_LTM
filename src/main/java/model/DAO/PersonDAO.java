@@ -23,6 +23,7 @@ public class PersonDAO {
 		try {
 			Connection con = ConnectDatabase.getMySQLConnection();
 			PreparedStatement psPerson = con.prepareStatement(CHECK_LOGIN);
+			
 			psPerson.setInt(1, id);
 			psPerson.setString(2, password);
 			ResultSet rs = psPerson.executeQuery();

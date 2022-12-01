@@ -7,6 +7,9 @@
 <title>Create new student</title>
 </head>
 <body>
+	<div class="navbar">
+        <jsp:include page="NavigationBar.jsp"></jsp:include>
+    </div>
 	<form action="<%=request.getContextPath()%>/Student/add" method="post">
 		<table>
 			<tr>
