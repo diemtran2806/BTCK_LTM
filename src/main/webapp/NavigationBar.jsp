@@ -73,7 +73,7 @@ body {
 				<a href="<%=request.getContextPath()%>/" class="text">Trang Chủ</a>
 			</div>
 			<div class="wrapper-button">
-				<a href="FacultyServlet" class="text">Khoa</a>
+				<a href="/Faculty/viewlist" class="text">Khoa</a>
 			</div>
 			<div class="wrapper-button">
 				<a href="<%=request.getContextPath()%>/Class/viewlist" class="text">Lớp Sinh Hoạt</a>
@@ -98,11 +98,6 @@ body {
 				} else {
 				%>
 				<a href="<%=request.getContextPath()%>/Auth/logout" class="text">Log out</a>
-<!-- 				<p> -->
-<!-- 					Welcome -->
-<%-- 					<%=session.getAttribute("name")%> --%>
-<!-- 					!!! -->
-<!-- 				</p> -->
 				<%
 				}
 				%>

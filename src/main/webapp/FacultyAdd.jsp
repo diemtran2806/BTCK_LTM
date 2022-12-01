@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h4 style="width:100%;text-align:center">Thêm Thông Tin Khoa</h4><hr>
-				<form action="FacultyServlet?insert=1" method="POST" style="width:50%;margin:auto" >
+				<form action="./add" method="POST" style="width:50%;margin:auto" >
 					Tên Khoa: <input type="text" required style="font-weight:bold" name="faculty_name" id="faculty_name">
 					<br>
 					<input type="submit" id="ok" name="add_faculty" value="OK" >
