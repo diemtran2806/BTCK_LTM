@@ -19,8 +19,4 @@ public class ConnectDatabase {
 		}
 		return null;
 	}
-//	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-//		ConnectDatabase t = new ConnectDatabase();
-//		Connection con = t.getMySQLConnection();
-//	}
 }
