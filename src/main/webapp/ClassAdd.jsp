@@ -18,7 +18,6 @@
 					<br>
 					Tên Lớp Sinh Hoạt: <input type="text" required style="font-weight:bold" name="class_name" id="class_name" class="form-control" >
 					<br>
-					<!-- Mã Khoa: <input type="text" required style="font-weight:bold" name="id_faculty" id="id_faculty" class="form-control" > -->
 					<select name="facultyOption" id="facultyOption">
 					<%
 					for (int i=0; i<faculty.size(); i++) {

@@ -21,6 +21,7 @@
 </style>
 </head>
 <body>
+
 	<div class="navbar">
         <jsp:include page="NavigationBar.jsp"></jsp:include>
     </div>

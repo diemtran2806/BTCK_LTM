@@ -30,7 +30,6 @@ public class ClassServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getPathInfo();
-//		System.out.println(action);
 		try {
 			switch (action) {
 			case "/add":
@@ -39,15 +38,9 @@ public class ClassServlet extends HttpServlet {
 			case "/viewlist":
 				viewClassList(request, response);
 				break;
-			
-			  case "/update": 
-				  showUpdateForm(request, response);
-				  break; 
-				/*
-				 * case "/delete": deleteLecturer(request, response); break; case "/search":
-				 * viewLecturerList(request, response); break;
-				 */
-			 
+			 case "/update": 
+				 showUpdateForm(request, response);
+				 break; 
 			default:
 
 				break;
@@ -56,83 +49,16 @@ public class ClassServlet extends HttpServlet {
 			throw new ServletException(ex);
 		}
 		
-		
-		/*
-		 * if (request.getParameter("updateClass")!=null) { //check(request, response);
-		 * Class cl = new Class();
-		 * cl.setId_class(Integer.parseInt(request.getParameter("oldId_class")));
-		 * cl.setClass_name(request.getParameter("class_name"));
-		 * cl.setId_faculty(Integer.parseInt(request.getParameter("facultyOption")));
-		 * Boolean rs = ClassBO.ClassUpdate(cl); if (rs==true) {
-		 * System.out.println("Update Successfull!"); } else {
-		 * System.out.println("Something went wrong!"); }
-		 * response.sendRedirect("ClassServlet"); } else if
-		 * (request.getParameter("update")!=null) { // check(request, response); // id
-		 * update String idup = request.getParameter("update"); // truyen thong tin id
-		 * den trang update form Class cl =
-		 * ClassBO.getClassByID(Integer.parseInt(idup)); ArrayList<Faculty> faculty =
-		 * new ArrayList<Faculty>(); faculty = FacultyBO.getAllFaculty();
-		 * request.setAttribute("ClassUpdate", cl); request.setAttribute("FacultyInfor",
-		 * faculty); request.getRequestDispatcher("ClassUpdate.jsp").forward(request,
-		 * response); } else if (request.getParameter("details")!=null) { //
-		 * check(request, response); // id update int idfac =
-		 * Integer.parseInt(request.getParameter("details")); // truyen thong tin id den
-		 * trang update form ArrayList<ClassView> clv =
-		 * ClassBO.getClassViewById_faculty(idfac);
-		 * request.setAttribute("ClassViewById_faculty", clv);
-		 * request.getRequestDispatcher("StudentList.jsp").forward(request, response); }
-		 * else if (request.getParameter("list_search")!=null) { ArrayList<ClassView>
-		 * classView = new ArrayList<ClassView>(); if
-		 * (request.getParameter("keysearch")==null) { classView =
-		 * ClassBO.getAllClassView();
-		 * 
-		 * } else { String key = request.getParameter("keysearch"); classView =
-		 * ClassBO.getClassViewByKeySearch(key); request.setAttribute("keysearch", key);
-		 * } request.setAttribute("classView", classView);
-		 * request.getRequestDispatcher("ClassList.jsp").forward(request, response); }
-		 */
-		/*
-		 * else if(request.getParameter("list_search")==null){ ArrayList<ClassView>
-		 * classView = null; // ClassArray = ClassBO.getAllClass(); if
-		 * (request.getParameter("keysearch")==null) { classView =
-		 * ClassBO.getAllClassView();
-		 * 
-		 * } // chuyen ve cho form request.setAttribute("classView", classView);
-		 * request.getRequestDispatcher("/ClassList.jsp").forward(request, response);
-		 * //doGet(request, response); }
-		 */
 	}
-	
-    private void code(HttpServletRequest request, HttpServletResponse response) {
-
-		  if (request.getParameter("updateClass")!=null) { //check(request, response);
-		  Class cl = new Class();
-		  cl.setId_class(Integer.parseInt(request.getParameter("oldId_class")));
-		  cl.setClass_name(request.getParameter("class_name"));
-		  cl.setId_faculty(Integer.parseInt(request.getParameter("facultyOption")));
-		  Boolean rs = ClassBO.ClassUpdate(cl); if (rs==true) {
-		  System.out.println("Update Successfull!"); } else {
-		  System.out.println("Something went wrong!"); }
-		  //response.sendRedirect("ClassServlet");
-		  }
-			/*
-			 * else if (request.getParameter("update")!=null) { // check(request, response);
-			 * // id update String idup = request.getParameter("update"); // truyen thong
-			 * tin id den trang update form Class cl =
-			 * ClassBO.getClassByID(Integer.parseInt(idup)); ArrayList<Faculty> faculty =
-			 * new ArrayList<Faculty>(); faculty = FacultyBO.getAllFaculty();
-			 * request.setAttribute("ClassUpdate", cl); request.setAttribute("FacultyInfor",
-			 * faculty); request.getRequestDispatcher("ClassUpdate.jsp").forward(request,
-			 * response); }
-			 */
-    	
-    }
-    
+	 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getPathInfo();
 		try {
 			switch (action) {
+			case "/viewlist":
+				viewClassList(request, response);
+				break;
 			case "/add":
 				createClass(request, response);
 			case "/update":
@@ -205,18 +131,20 @@ public class ClassServlet extends HttpServlet {
 		response.sendRedirect("./viewlist");
 	}
 	private void viewClassList (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("list_search")==null){
-			ArrayList<ClassView> classView = null;
-//			ClassArray = ClassBO.getAllClass();
-			if (request.getParameter("keysearch")==null) {
+		ArrayList<ClassView> classView = null;
+		if(request.getParameter("keysearch")==null){
 				classView = ClassBO.getAllClassView();
-				
-			}
-			// chuyen ve cho form
-			request.setAttribute("classView", classView);
-			request.getRequestDispatcher("/ClassList.jsp").forward(request, response);
-		//doGet(request, response);
+				request.setAttribute("classView", classView);
+				request.getRequestDispatcher("../ClassList.jsp").forward(request, response);
 		}
+			else { 
+				String key = request.getParameter("keysearch"); 
+				classView = ClassBO.getClassViewByKeySearch(key); 
+				request.setAttribute("keysearch", key);
+			    request.setAttribute("classView", classView);
+			    request.getRequestDispatcher("../ClassList.jsp").forward(request, response); 
+			}
+		
 	}
 	private void showUpdateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		  String idup = request.getParameter("update"); 
@@ -240,5 +168,4 @@ public class ClassServlet extends HttpServlet {
 		  }
 		  response.sendRedirect("./viewlist");
 	}
-
 }

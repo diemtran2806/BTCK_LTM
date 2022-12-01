@@ -11,7 +11,7 @@
 				<% 
 				Faculty fac = (Faculty)request.getAttribute("FacultyUpdate");
 				%>
-				<form action="FacultyServlet?updateFaculty=1" method="POST" style="width:50%;margin:auto" >
+				<form action="./update" method="POST" style="width:50%;margin:auto" >
 					<input type="text" hidden required style="font-weight:bold" name="oldId_faculty" id="oldId_faculty" value="<%= fac.getId_faculty() %>" >
                     <label for="id_class">Mã khoa</label>
 					<input type="text" disabled required style="font-weight:bold" name="id_faculty" id="id_faculty" value="<%= fac.getId_faculty() %>" >

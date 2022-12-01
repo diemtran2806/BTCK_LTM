@@ -124,7 +124,11 @@ public class ClassDAO {
 		try {
 			Connection con = ConnectDatabase.getMySQLConnection();
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from class where id_faculty = " + idfac);
+			ResultSet rs = stmt.executeQuery("select id_class, class_name, class.id_faculty, faculty_name "
+					+ "from class  "
+					+ "inner join faculty  "
+					+ "on class.id_faculty = faculty.id_faculty  where class.id_faculty = " + idfac);
+			//ResultSet rs = stmt.executeQuery("select * from class where id_faculty = " + idfac);
 			
 			while (rs.next()) {
 				ClassView clv = new ClassView();

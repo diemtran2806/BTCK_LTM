@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 	<style>
@@ -99,7 +99,7 @@
         <jsp:include page="NavigationBar.jsp"></jsp:include>
     </div>
 	<div class="wrapper-content">
-		<form action="?list_search=1" method="POST" class="search-form">
+		<form action="./viewlist" method="POST" class="search-form">
 			<input <% if (request.getAttribute("keysearch")!=null)  {%> value="<%= request.getAttribute("keysearch") %>"<% } %>
 					type='text' name='keysearch' placeholder='Enter Text Search' class="search">
 			<button type="submit" class="btn">Search</button>
