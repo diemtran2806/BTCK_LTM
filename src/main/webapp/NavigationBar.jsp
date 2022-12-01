@@ -70,7 +70,7 @@ body {
 	<div class="wrapper">
 		<div class="menu">
 			<div class="wrapper-button">
-				<a href="<%=request.getContextPath()%>/Home.jsp" class="text">Trang Chủ</a>
+				<a href="<%=request.getContextPath()%>/" class="text">Trang Chủ</a>
 			</div>
 			<div class="wrapper-button">
 				<a href="FacultyServlet" class="text">Khoa</a>
