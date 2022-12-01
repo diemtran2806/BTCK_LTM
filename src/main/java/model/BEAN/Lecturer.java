@@ -7,8 +7,8 @@ public class Lecturer extends Person {
 	private int id_faculty;
     private int lecturer_salary;
     
-    public Lecturer(int id_lecture, String name, String password, String role, String phone, String email, String CCCD, boolean gender, String address, Date dob, int id_faculty, int lecturer_salary) {
-		super(id_lecture, name, password, role, phone, email, CCCD, gender, address, dob);
+    public Lecturer(int id_lecture, String name, String password, String role, String phone, String email, String CCCD, boolean gender, String address, Date dob, String img, int id_faculty, int lecturer_salary) {
+		super(id_lecture, name, password, role, phone, email, CCCD, gender, address, dob, img);
 		this.id_faculty = id_faculty;
 		this.lecturer_salary = lecturer_salary;
 	}

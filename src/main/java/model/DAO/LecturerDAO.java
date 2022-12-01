@@ -12,18 +12,18 @@ public class LecturerDAO {
 														+ "values(?,?,?,?,?,?,?,?,?);\r\n";
 		private static final String CREATE_LECTURER = "INSERT INTO lecturer(id_lecturer,id_faculty,lecturer_salary)\r\n"
 														+ "values(?, ?, ?);";
-		private static final String GET_ALL_LECTURER = "SELECT id_person, name,  faculty_name, role, phone, email, CCCD, gender, address, dob, faculty_name, lecturer_salary "
+		private static final String GET_ALL_LECTURER = "SELECT id_person, name,  faculty_name, role, phone, email, CCCD, gender, address, dob, img, faculty_name, lecturer_salary "
 														+ "from "
 														+ "(select * from lecturer left join person on lecturer.id_lecturer = person.id_person) as lec "
 														+ "left join faculty on lec.id_faculty = faculty.id_faculty;";
-		private static final String UPDATEP_PERSON = "UPDATE person\r\n"
-														+ "SET  name= ?, password= ?, phone= ?, email= ?, CCCD= ?, gender= ?,address= ?, dob= ?\r\n"
+		private static final String UPDATE_PERSON = "UPDATE person\r\n"
+														+ "SET  name= ?, password= ?, phone= ?, email= ?, CCCD= ?, gender= ?,address= ?, dob= ? , img=?\r\n"
 														+ "WHERE id_person = ?;";
 		private static final String UPDATE_LECTURER = "UPDATE lecturer\r\n"
 														+ "SET  id_faculty= ?, lecturer_salary = ?\r\n"
 														+ "WHERE id_lecturer = ?;";
 		private static final String GET_LECTURER_BY_ID = "select "
-															+ "id_person, id_faculty, lecturer_salary, name, phone, email, CCCD,role, gender, address, dob "
+															+ "id_person, id_faculty, lecturer_salary, name, phone, email, CCCD,role, gender, address, dob,img "
 															+ "from "
 															+ "lecturer left join person "
 															+ "on"
@@ -31,7 +31,7 @@ public class LecturerDAO {
 															+ "where "
 															+ "id_person = ?;\r\n";
 		private static final String SEARH_LECTURER ="SELECT "
-													+ "id_person, name,  faculty_name, role, phone, email, CCCD, gender, address, dob, faculty_name, lecturer_salary "
+													+ "id_person, name,  faculty_name, role, phone, email, CCCD, gender, address, dob,img, faculty_name, lecturer_salary "
 													+ "from "
 													+ "(select * from lecturer left join person on lecturer.id_lecturer = person.id_person) "
 													+ "as lec "
@@ -112,7 +112,7 @@ public class LecturerDAO {
 					rs = psPerson.executeQuery();
 				}
 				while(rs.next()) {
-					result.add(new LecturerListView(rs.getInt("id_person"), rs.getString("name"),"",rs.getString("role"),rs.getString("phone"),rs.getString("email"),rs.getString("CCCD"),rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getString("faculty_name"),rs.getInt("lecturer_salary")));
+					result.add(new LecturerListView(rs.getInt("id_person"), rs.getString("name"),"",rs.getString("role"),rs.getString("phone"),rs.getString("email"),rs.getString("CCCD"),rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getString("img"),rs.getString("faculty_name"),rs.getInt("lecturer_salary")));
 				}
 			}
 			catch(Exception ex) {
@@ -131,7 +131,7 @@ public class LecturerDAO {
 				System.out.println(psLecturer);
 				ResultSet rs = psLecturer.executeQuery();
 				if(rs.next()) {
-					result = new Lecturer(rs.getInt("id_person"), rs.getString("name"),"",rs.getString("role"),rs.getString("phone"),rs.getString("email"),rs.getString("CCCD"),rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getInt("id_faculty"),rs.getInt("lecturer_salary"));
+					result = new Lecturer(rs.getInt("id_person"), rs.getString("name"),"",rs.getString("role"),rs.getString("phone"),rs.getString("email"),rs.getString("CCCD"),rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getString("img"),rs.getInt("id_faculty"),rs.getInt("lecturer_salary"));
 				}
 				
 			}
@@ -166,7 +166,7 @@ public class LecturerDAO {
 				psLecturer.setInt(3, Lecturer.getId_person());
 				psLecturer.executeUpdate();  
 				
-				PreparedStatement psPerson = con.prepareStatement(UPDATEP_PERSON);
+				PreparedStatement psPerson = con.prepareStatement(UPDATE_PERSON);
 				psPerson.setString(1, Lecturer.getName());
 				psPerson.setString(2, Lecturer.getRole());
 				psPerson.setString(3, Lecturer.getPhone());
@@ -176,6 +176,7 @@ public class LecturerDAO {
 				psPerson.setString(7, Lecturer.getAddress());
 				psPerson.setDate(8, Lecturer.getDob());
 				psPerson.setInt(9, Lecturer.getId_person());
+				psPerson.setString(10,Lecturer.getImg());
 				psPerson.executeUpdate(); 
 			}  catch (Exception e) {
 				// TODO Auto-generated catch block

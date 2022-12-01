@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div class="container">
-		<form class="search_form" name="search_" method="post" action="./search" onsubmit="return required()">     
+		<form class="search_form" name="search_" method="post" action="./viewlist" onsubmit="return required()">     
 		    <input class="search_box" type="text" name="search" placeholder="Type here..." value=""><br>
 			<input class="search_button" type="submit" name="submit" value="search"/>
 		</form>

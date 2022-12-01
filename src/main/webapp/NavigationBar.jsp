@@ -85,7 +85,7 @@ body {
 				<a href="<%=request.getContextPath()%>/Admin/viewlist" class="text">Admin</a>
 			</div>
 			<div class="wrapper-button">
-				<a href="<%=request.getContextPath()%>/Lecturer/viewlist" class="text">Admin</a>
+				<a href="<%=request.getContextPath()%>/Lecturer/viewlist" class="text">Giảng viên</a>
 			</div>
 		</div>
 		<div class="menu">

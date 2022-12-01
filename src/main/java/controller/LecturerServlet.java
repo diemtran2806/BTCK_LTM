@@ -116,12 +116,13 @@ public class LecturerServlet extends HttpServlet {
 			   
 			    String str=request.getParameter("dob");  
 			    Date dob=Date.valueOf(str);//converting string into sql date  
+			    String img = request.getParameter("img");
 			    
 			    int id_lecturer = 0;
 			    int id_faculty = Integer.parseInt(request.getParameter("id_faculty"));
 			    int lecturer_salary = Integer.parseInt(request.getParameter("lecturer_salary"));
 			    
-				Lecturer lecturer = new Lecturer(id_lecturer,name,password,role,phone,email,CCCD,gender,address,dob,id_faculty,lecturer_salary);
+				Lecturer lecturer = new Lecturer(id_lecturer,name,password,role,phone,email,CCCD,gender,address,dob,img,id_faculty,lecturer_salary);
 				boolean result = LecturerBO.createLecturer(lecturer);
 				response.sendRedirect("./viewlist");
 				if(result) {
@@ -173,10 +174,11 @@ public class LecturerServlet extends HttpServlet {
 			   
 			    String str=request.getParameter("dob");  
 			    Date dob=Date.valueOf(str);//converting string into sql date  
+			    String img = request.getParameter("img");
 			    int id_faculty = Integer.parseInt(request.getParameter("id_faculty"));
 			    int lecturer_salary = Integer.parseInt(request.getParameter("lecturer_salary"));
 			    
-				Lecturer lecturer = new Lecturer(id_persion,name,password,role,phone,email,CCCD,gender,address,dob,id_faculty,lecturer_salary);
+				Lecturer lecturer = new Lecturer(id_persion,name,password,role,phone,email,CCCD,gender,address,dob,img,id_faculty,lecturer_salary);
 				boolean result = LecturerBO.updateLecturer(lecturer);
 				response.sendRedirect("./viewlist");
 //				if(result) {
