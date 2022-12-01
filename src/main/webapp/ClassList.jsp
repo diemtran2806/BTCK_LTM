@@ -37,9 +37,13 @@
 		tr:hover {
 			background-color: #d6d9ff;
 		}
+		
 		th {
   			background-color: #04AA6D;
   			color: white;
+		}
+		thead tr:hover {
+			background-color: transparent;
 		}
 		h4 {
 			text-align: center;
