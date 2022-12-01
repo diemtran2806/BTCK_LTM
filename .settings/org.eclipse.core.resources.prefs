@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/main/java/model/DAO/ConnectDatabase.java=UTF-8
+encoding//src/main/webapp/ClassAdd.jsp=UTF-8
+encoding//src/main/webapp/ClassList.jsp=UTF-8
+encoding//src/main/webapp/ClassUpdate.jsp=UTF-8
