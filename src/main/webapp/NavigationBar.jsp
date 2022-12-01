@@ -73,7 +73,7 @@ body {
 				<a href="<%=request.getContextPath()%>/" class="text">Trang Chủ</a>
 			</div>
 			<div class="wrapper-button">
-				<a href="/Faculty/viewlist" class="text">Khoa</a>
+				<a href="<%=request.getContextPath()%>/Faculty/viewlist" class="text">Khoa</a>
 			</div>
 			<div class="wrapper-button">
 				<a href="<%=request.getContextPath()%>/Class/viewlist" class="text">Lớp Sinh Hoạt</a>
