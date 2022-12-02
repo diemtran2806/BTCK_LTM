@@ -74,75 +74,7 @@ public class FacultyServlet extends HttpServlet {
 			throw new ServletException(ex);
 		}
 	}
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//    	request.setCharacterEncoding("UTF-8");
-//		if (request.getParameter("add")!=null) {
-//			//chuyen ve form them
-//			response.sendRedirect("FacultyAdd.jsp");
-//		} else if (request.getParameter("insert")!=null) {
-//			//check tai khoan
-//			//check(request, response);
-//			//them vao co so du lieu
-//			Faculty fac = new Faculty();
-//			fac.setId_faculty(0);
-//			fac.setFaculty_name(request.getParameter("faculty_name"));
-//			Boolean rs = FacultyBO.FacultyAdd(fac);
-//			if (rs==true) {
-//				System.out.println("Add successfuly!");
-//			} else {
-//				System.out.println("Something went wrong!");
-//			}
-//			response.sendRedirect("FacultyServlet");
-//		}
-//		else if (request.getParameter("updateFaculty")!=null) {
-//			//check(request, response);
-//			Faculty fac = new Faculty();
-//			fac.setId_faculty(Integer.parseInt(request.getParameter("oldId_faculty")));
-//			fac.setFaculty_name(request.getParameter("faculty_name"));
-//			Boolean rs = FacultyBO.FacultyUpdate(fac);
-//			if (rs==true) {
-//				System.out.println("Update Successfull!");
-//			}
-//			else {
-//				System.out.println("Something went wrong!");
-//			}
-//			response.sendRedirect("FacultyServlet");
-//		}
-//		else if (request.getParameter("update")!=null) {
-////			check(request, response);
-//			// id update
-//			String idup = request.getParameter("update"); 
-//			// truyen thong tin id den trang update form
-//			Faculty fac = FacultyBO.getFacultyByID(Integer.parseInt(idup));
-//			request.setAttribute("FacultyUpdate", fac);
-//			request.getRequestDispatcher("FacultyUpdate.jsp").forward(request, response);
-//		}
-//		else if (request.getParameter("list_search")!=null) {
-//			ArrayList<Faculty> faculty = new ArrayList<Faculty>();
-//			if (request.getParameter("keysearch")==null) {
-//				faculty = FacultyBO.getAllFaculty();
-//				
-//			}
-//			else {
-//				String key = request.getParameter("keysearch");
-//				faculty = FacultyBO.getFacultyByKeySearch(key);
-//				request.setAttribute("keysearch", key);
-//			}
-//			request.setAttribute("faculty", faculty);
-//			request.getRequestDispatcher("FacultyList.jsp").forward(request, response);
-//		}
-//		else if(request.getParameter("list_search")==null){
-//			ArrayList<Faculty> faculty = null;
-//			if (request.getParameter("keysearch")==null) {
-//				faculty = FacultyBO.getAllFaculty();
-//				
-//			}
-//			// chuyen ve cho form
-//			request.setAttribute("faculty", faculty);
-//			request.getRequestDispatcher("/FacultyList.jsp").forward(request, response);
-//		//doGet(request, response);
-//		}
-//	}
+
     
     private void viewFacultyList (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Faculty> faculty = null;
@@ -205,9 +137,13 @@ public class FacultyServlet extends HttpServlet {
 		int idfac = Integer.parseInt(request.getParameter("details"));
 		System.out.println(idfac);
 		ArrayList<ClassView> clv = ClassBO.getClassViewById_faculty(idfac);
-		request.setAttribute("classView", clv);
-		System.out.println(clv.get(1).getClass_name());
+		request.setAttribute("classView", clv );
+		System.out.println(clv.size()+"hehe");
+//		System.out.println(clv.get(1).getClass_name());
 //		response.sendRedirect("../ClassList.jsp");
+		ArrayList<Faculty> faculty = new ArrayList<Faculty>();
+		faculty = FacultyBO.getAllFaculty();
+		request.setAttribute("FacultyInfor", faculty);
 		request.getRequestDispatcher("../ClassList.jsp").forward(request, response); 
 	}
 

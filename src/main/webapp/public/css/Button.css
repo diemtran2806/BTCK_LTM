@@ -10,7 +10,7 @@
 			cursor: pointer;
 		}
 		.btn-add {
-			/* margin-left:32px;
-			margin-top: 12px; */
-			margin: 12px 12px 12px 32px;
+			margin-left: 32px;
+			height: 32px;
+			margin-top: 48px;
 		}

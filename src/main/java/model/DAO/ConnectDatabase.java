@@ -12,7 +12,7 @@ public class ConnectDatabase {
 	public static Connection getMySQLConnection() throws ClassNotFoundException, SQLException
 	{
 		Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/qlsv", "root", "190523");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/qlsv", "root", "");
 		if (conn != null) {
 			System.out.println("Connected!");
 			return conn;

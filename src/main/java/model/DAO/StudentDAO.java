@@ -30,9 +30,13 @@ public class StudentDAO {
 			+ "CCCD like ? or address like N? or dob like N? or class_name like N?;";
 	private static final String GET_ALL_STUDENT_CLASS = "SELECT person.id_person,name,role,phone,email,CCCD,gender"
 			+ ",address,dob,img,class_name FROM student LEFT JOIN person ON "
-			+ "student.id_student = person.id_person LEFT JOIN class on student.id_class=class.id_class where "
+			+ "student.id_student = person.id_person LEFT JOIN class on student.id_class=class.id_class where ("
 			+ "student.id_student=? or name like N? or phone like ? or email like ? or "
-			+ "CCCD like ? or address like N? or dob like N? or class_name like N? WHERE student.id_class=?;";
+			+ "CCCD like ? or address like N? or dob like N? or class_name like N?) and student.id_class=?;";
+//	private static final String GET_ALL_STUDENT_CLASS2 = "SELECT person.id_person,name,role,phone,email,CCCD,gender"
+//			+ ",address,dob,img,class_name FROM student LEFT JOIN person ON "
+//			+ "student.id_student = person.id_person LEFT JOIN class on student.id_class=class.id_class where "
+//			+ "student.id_class=?;";
 	private static final String GET_ALL_CLASS = "SELECT id_class,class_name from class;";
 
 	public static boolean createStudent(Student student) {

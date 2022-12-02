@@ -15,8 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import model.BEAN.Class;
 import model.BEAN.ClassView;
 import model.BEAN.Faculty;
+import model.BEAN.StudentView;
 import model.BO.ClassBO;
 import model.BO.FacultyBO;
+import model.BO.StudentBO;
 
 @WebServlet("/Class/*")
 public class ClassServlet extends HttpServlet {
@@ -41,6 +43,9 @@ public class ClassServlet extends HttpServlet {
 			 case "/update": 
 				 showUpdateForm(request, response);
 				 break; 
+			 case "/details": 
+				 showDetailsClass(request, response);
+				 break;
 			default:
 
 				break;
@@ -61,8 +66,10 @@ public class ClassServlet extends HttpServlet {
 				break;
 			case "/add":
 				createClass(request, response);
+				break;
 			case "/update":
 				updateClass(request, response);
+				break;
 			default:
 
 				break;
@@ -71,40 +78,7 @@ public class ClassServlet extends HttpServlet {
 			throw new ServletException(ex);
 		}
 	}
-		
-	/*
-	  else if (request.getParameter("details")!=null) { //
-	 * check(request, response); // id update int idfac =
-	 * Integer.parseInt(request.getParameter("details")); // truyen thong tin id den
-	 * trang update form ArrayList<ClassView> clv =
-	 * ClassBO.getClassViewById_faculty(idfac);
-	 * request.setAttribute("ClassViewById_faculty", clv);
-	 * request.getRequestDispatcher("StudentList.jsp").forward(request, response); }
-	 * else if (request.getParameter("list_search")!=null) { ArrayList<ClassView>
-	 * classView = new ArrayList<ClassView>(); if
-	 * (request.getParameter("keysearch")==null) { classView =
-	 * ClassBO.getAllClassView();
-	 * 
-	 * } else { String key = request.getParameter("keysearch"); classView =
-	 * ClassBO.getClassViewByKeySearch(key); request.setAttribute("keysearch", key);
-	 * } request.setAttribute("classView", classView);
-	 * request.getRequestDispatcher("ClassList.jsp").forward(request, response); }
-	 */
-	/*
-	 * else if(request.getParameter("list_search")==null){ ArrayList<ClassView>
-	 * classView = null; // ClassArray = ClassBO.getAllClass(); if
-	 * (request.getParameter("keysearch")==null) { classView =
-	 * ClassBO.getAllClassView();
-	 * 
-	 * } // chuyen ve cho form request.setAttribute("classView", classView);
-	 * request.getRequestDispatcher("/ClassList.jsp").forward(request, response);
-	 * //doGet(request, response); } 
-	 * }
-	 */
-	/*
-	 * protected void doGet(HttpServletRequest request, HttpServletResponse
-	 * response) throws ServletException, IOException { doPost(request, response); }
-	 */
+
 	
 	private void showAddForm (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Faculty> faculty = new ArrayList<Faculty>();
@@ -119,7 +93,8 @@ public class ClassServlet extends HttpServlet {
 
 		System.out.println("hello hihi");
 		Class cl = new Class();
-		cl.setId_class( Integer.parseInt(request.getParameter("id_class")));
+		//Integer.parseInt(request.getParameter("id_class"))
+		cl.setId_class(0);
 		cl.setClass_name(request.getParameter("class_name"));
 		cl.setId_faculty(Integer.parseInt(request.getParameter("facultyOption")));
 		Boolean rs = ClassBO.ClassAdd(cl);
@@ -131,6 +106,9 @@ public class ClassServlet extends HttpServlet {
 		response.sendRedirect("./viewlist");
 	}
 	private void viewClassList (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<Faculty> faculty = new ArrayList<Faculty>();
+		faculty = FacultyBO.getAllFaculty();
+		request.setAttribute("FacultyInfor", faculty);
 		ArrayList<ClassView> classView = null;
 		if(request.getParameter("keysearch")==null){
 				classView = ClassBO.getAllClassView();
@@ -167,5 +145,14 @@ public class ClassServlet extends HttpServlet {
 		  System.out.println("Something went wrong!");
 		  }
 		  response.sendRedirect("./viewlist");
+	}
+	private void showDetailsClass(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int idclass = Integer.parseInt(request.getParameter("details"));
+		ArrayList<StudentView> stv = StudentBO.getStudentListByClass("", idclass);
+		System.out.println(idclass);
+		request.setAttribute("studentList", stv);
+		System.out.println(stv.size());
+//		response.sendRedirect("../ClassList.jsp");
+		request.getRequestDispatcher("../StudentList.jsp").forward(request, response); 
 	}
 }
