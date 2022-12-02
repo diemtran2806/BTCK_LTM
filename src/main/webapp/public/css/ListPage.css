@@ -35,5 +35,115 @@ body {
 			outline: none;
     		border: none;
 		}
+		/*login*/
+		.wapper-login {
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: #f2f2f26e;
+		}
+		.container.login {
+			box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+		}
+		.error {
+			color: red;
+			font-size: 12px;
+			margin-top: 24px;
+		}
+ 		/* modal */
+		.modal {
+    position: fixed;
+    top:0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0, 0.4);
+    align-items:center;
+    justify-content:center;
+    z-index: 10;
+    display: none;
+}
+	.modal.open {
+		display: flex;
+	}
+	.container {
+		position: relative;
+		background-color: #fff;
+		width: 500px;
+		min-height: 200px;
+		max-width: calc(100%-32px);
+		animation: modalFadeIn ease 0.5;
+		border-radius: 10px;
+	}
+	header.modal-header {
+		background: #255783;
+		height: 42px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color:#fff;
+		font-weight: 500;
+		font-size: 15px;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+	}
+	.header-btn {
+		display:flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.modal-close {
+		position: absolute;
+		right: 0;
+		top: 0;
+		padding: 8px;
+		color: #fff;
+		font-weight: 500;
+		cursor: pointer;
+	}
+	.modal-close:hover {
+		opacity: 0.8;
+	}
+	.modal-body {
+		padding: 32px;
+	}
+	.modal-input {
+		border: 1px solid #ccc;
+		width: 100%;
+		padding: 10px;
+		margin-bottom: 12px;
+		margin-top: 12px;
+	}
+	.modal-form {
+		margin-top: 12px;
+		text-align: left;
+	}
+	.wrapper-btn {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 12px;
+	}
+	.modal-label {
+		margin-bottom: 12px;
+		font-size: 14px;
+	}
+	@keyframes modalFadeIn {
+		from {
+			transform: translateY(-140px);
+		}
+		to {
+			transform: translateY(0);
+		}
+	} 
+	.modal-option {
+		padding: 12px;
+		outline: none;
+		border: 1px solid #ccc;
+		width: 100%;
+		margin-bottom: 12px;
+		margin-top: 12px;
+		color: #666;
+	}
 		
 	

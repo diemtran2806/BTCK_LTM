@@ -19,12 +19,14 @@
         <jsp:include page="NavigationBar.jsp"></jsp:include>
     </div>
     <div class="wrapper-content">
+    <div class="header-btn">
+    <button id="add" class="btn btn-add">Add</button>
 	<form action="./viewlist" method="POST" class="search-form">
 		<input <% if (request.getAttribute("keysearch")!=null)  {%> value="<%= request.getAttribute("keysearch") %>"<% } %>
 					type='text' name='keysearch' placeholder='Enter Text Search' class="search">
 		<button type="submit" class="btn">Search</button>
 	</form>
-            <h4>Thông Tin Khoa</h4>
+	</div>
             <table width='100%'>
                 <thead>
                     <tr>
@@ -58,7 +60,6 @@
                 </tbody>
             </table>
             <!-- <a href="./add"><button id="add" class="btn btn-add">Add</button></a> -->
-            <button id="add" class="btn btn-add">Add</button>
             <div class="modal">
             	<div class="container">
             		<div class="modal-close">X</div>
