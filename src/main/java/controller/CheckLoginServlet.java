@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.BEAN.Lecturer;
 import model.BEAN.Person;
+import model.BO.LecturerBO;
 import model.BO.PersonBO;
 
 @WebServlet("/Auth/*")
@@ -58,7 +60,7 @@ public class CheckLoginServlet extends HttpServlet {
 				logout(request, response);
 				break;
 			case "/changepassword":
-				changePasswordView(request, response);
+				changePassword(request, response);
 				break;
 			default:
 				break;
@@ -101,8 +103,25 @@ public class CheckLoginServlet extends HttpServlet {
 
 	private void changePasswordView(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			RequestDispatcher rd = request.getRequestDispatcher("../UpdatePassword.jsp");
+			int id = 55;//get secson id thèn nớ zô đây
+			request.setAttribute("id", id);
+			RequestDispatcher rd = request.getRequestDispatcher("../ChangePassword.jsp");
 			rd.forward(request, response);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private void changePassword(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			int id = Integer.parseInt(request.getParameter("id"));
+			String password = request.getParameter("password");
+			boolean result = PersonBO.updatePassword(id,password);
+			if(result) {
+				RequestDispatcher rd = request.getRequestDispatcher("/");
+				rd.forward(request, response);
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

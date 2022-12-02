@@ -146,10 +146,11 @@ public class PersonDAO {
 	
 	public static boolean updatePassword(int id, String password) {
 		try {
+			
 			Connection con = ConnectDatabase.getMySQLConnection();
 			PreparedStatement psPerson = con.prepareStatement(UPDATE_PASSWORD);
-			psPerson.setInt(1, id);
-			psPerson.setString(2, password);
+			psPerson.setString(1, password);
+			psPerson.setInt(2, id);
 			psPerson.executeUpdate();
 		} catch (Exception e) {
 			

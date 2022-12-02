@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/ListPage.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/Button.css">
-<title>Đổi mật khẩu</title>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/ListPage.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/Button.css">
+	<title>Đổi mật khẩu</title>
 </head>
 <body>
 	<div class="navbar">
@@ -19,7 +19,8 @@
 		<header class="modal-header">Change password</header>
 		<div class="modal-body">
 		<div class="modal-form">
-			<form class="search-form" method="post" action="./update">
+			<form class="search-form" method="post" action="./changepassword">
+					<input type="text" name="id" value="<%= request.getAttribute("id")%>" hidden>
 	        		<input type="password" id="pw1"  placeholder="Nhập mật khẩu" class="modal-input">
 	        		<br>
 					<input type="password" id="pw2" name="password" placeholder="Nhập lại mật khẩu" class="modal-input">
