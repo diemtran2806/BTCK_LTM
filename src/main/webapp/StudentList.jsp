@@ -34,6 +34,9 @@
 				<th>Địa chỉ</th>
 				<th>Ngày sinh</th>
 				<th>Lớp</th>
+				<th>Cập nhật</th>
+				<th>Xóa</th>
+				<th>Xóa nhiều</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -52,9 +55,9 @@
 				<td><%=studentList.get(i).getDob()%></td>
 				<td><%=studentList.get(i).getClass_name()%></td>
 				<td><a
-					href="<%=request.getContextPath()%>/Student/update?id=<%=studentList.get(i).getId_person()%>"><button type="button">Update</button></a></td>
+					href="<%=request.getContextPath()%>/Student/update?id=<%=studentList.get(i).getId_person()%>"><button class="btn" type="button">Update</button></a></td>
 				<td><a
-					href="<%=request.getContextPath()%>/Student/delete?id=<%=studentList.get(i).getId_person()%>"><button type="button">Delete</button></a></td>
+					href="<%=request.getContextPath()%>/Student/delete?id=<%=studentList.get(i).getId_person()%>"><button class="btn" type="button">Delete</button></a></td>
 				<td><input type="checkbox" name="delete"
 					value="<%=studentList.get(i).getId_person()%>"></td>
 			</tr>

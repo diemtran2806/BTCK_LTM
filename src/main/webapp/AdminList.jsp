@@ -35,6 +35,9 @@
 					<th>Địa chỉ</th>
 					<th>Ngày sinh</th>
 					<th>Lương</th>
+					<th>Cập nhật</th>
+					<th>Xóa</th>
+					<th>Xóa nhiều</th>
 				</tr>
 				</thead>
 				 <tbody>
@@ -53,9 +56,9 @@
 					<td><%=adminList.get(i).getDob()%></td>
 					<td><%=adminList.get(i).getAdmin_salary()%></td>
 					<td><a
-						href="<%=request.getContextPath()%>/Admin/update?id=<%=adminList.get(i).getId_person()%>"><button type="button">Update</button></a></td>
+						href="<%=request.getContextPath()%>/Admin/update?id=<%=adminList.get(i).getId_person()%>"><button class="btn" type="button">Update</button></a></td>
 					<td><a
-						href="<%=request.getContextPath()%>/Admin/delete?id=<%=adminList.get(i).getId_person()%>"><button type="button">Delete</button></a></td>
+						href="<%=request.getContextPath()%>/Admin/delete?id=<%=adminList.get(i).getId_person()%>"><button class="btn" type="button">Delete</button></a></td>
 					<td><input type="checkbox" name="delete"
 						value="<%=adminList.get(i).getId_person()%>"></td>
 				</tr>

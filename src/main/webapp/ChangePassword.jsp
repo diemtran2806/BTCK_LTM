@@ -4,25 +4,38 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/Table.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/Button.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/ListPage.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/ListPage.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/Button.css">
 <title>Đổi mật khẩu</title>
 </head>
 <body>
 	<div class="navbar">
         <jsp:include page="NavigationBar.jsp"></jsp:include>
     </div>
-	<div class="wrapper-content">
-		<form class="search-form" method="post" action="./update">
-        	<div class="flex-wrap">
-        		<input class="search" type="password" id="pw1">
-				<input class="search" type="password" id="pw2" name="password">
-				<p id="notication"></p>
-        	</div>
-			<input class="btn" type="submit" name="submit" value="Update"/>
-    	</form>
-    </div>	
+	<div class="wapper-login">
+		<div class="container login">
+		<header class="modal-header">Change password</header>
+		<div class="modal-body">
+		<div class="modal-form">
+			<form class="search-form" method="post" action="./update">
+	        		<input type="password" id="pw1"  placeholder="Nhập mật khẩu" class="modal-input">
+	        		<br>
+					<input type="password" id="pw2" name="password" placeholder="Nhập lại mật khẩu" class="modal-input">
+					<br>
+					<p id="notication"></p>
+					<div class="wrapper-btn">
+						<input class="btn" type="submit" name="submit" value="Update"/>
+	    			</div>
+				</form>
+		    	<div id="error" class="error">
+					<c:if test="${not empty error}"> ${error} </c:if>
+				</div>
+		</div>
+		</div>
+	</div>
+  </div>	
     <script>
 	    const pw1 = document.getElementById("pw1");
 		const pw2 = document.getElementById("pw2");
