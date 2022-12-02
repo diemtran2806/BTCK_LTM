@@ -1,3 +1,4 @@
+<%@page import="model.BEAN.Faculty"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.BEAN.ClassView"%>
 <%@page import="model.BEAN.Class"%>
@@ -20,25 +21,34 @@
         <jsp:include page="NavigationBar.jsp"></jsp:include>
     </div>
 	<div class="wrapper-content">
-		<form action="./viewlist" method="POST" class="search-form">
+	<div class="header-btn">
+	<button id="add" class="btn btn-add">Add</button>
+		<form action="../Class/viewlist" method="POST" class="search-form">
 			<input <% if (request.getAttribute("keysearch")!=null)  {%> value="<%= request.getAttribute("keysearch") %>"<% } %>
 					type='text' name='keysearch' placeholder='Enter Text Search' class="search">
 			<button type="submit" class="btn">Search</button>
 		</form>
-            <h4>Dữ Liệu Bảng Lớp Sinh Hoạt</h4>
+	</div>
             <table  class="data" width='100%'>
                 <thead>
                     <tr>
-                        <td>ID Class</th>
-                        <td>Class Name</th>
-                        <td>ID Faculty</th>
-                        <td>Faculty Name</th>
-                        <td>Update</th>
+                        <td>ID Class</td>
+                        <td>Class Name</td>
+                        <td>ID Faculty</td>
+                        <td>Faculty Name</td>
+                        <td>Update</td>
+                        <td>Details</td>
                     </tr>
                 </thead>
                 <tbody>
                 	<%
 	                    ArrayList<ClassView> classView = (ArrayList<ClassView>)request.getAttribute("classView");
+                	if(classView.size() == 0) {
+                		%>
+                		<h2>Không có kết quả nào!</h2>
+                		<%
+                	}
+                	else{
 	                    for (int i=0; i<classView.size(); i++) {
 	                    %>
 	                    <tr>
@@ -47,13 +57,69 @@
 	                    	<td><%= classView.get(i).getId_faculty() %></td>
 	                    	<td><%= classView.get(i).getFaculty_name() %></td>
 	                    	<td><a href="./update?update=<%=classView.get(i).getId_class() %>"><button class="btn">Update</button></a>
+	                   		<td><a href="../Class/details?details=<%=classView.get(i).getId_class() %>"><button type="button" class="btn">Chi tiết</button></a>
 	                   	</tr>
 	                   	<% 
 	                   	}
+	                    
+                	}
 	                   	%>
                 </tbody>
             </table>
-            <a href="./add"><button class="btn btn-add">Add</button></a>
+            <!-- <a href="./add"><button class="btn btn-add">Add</button></a> -->
+            <!-- <button id="add" class="btn btn-add">Add</button> -->
+            <%
+	              ArrayList<Faculty> faculty = (ArrayList<Faculty>)request.getAttribute("FacultyInfor");
+             %>
+            <div class="modal">
+            	<div class="container">
+            		<div class="modal-close">X</div>
+            		<header class="modal-header"> Thêm Lớp
+            		</header>
+            		<div class="modal-body">
+            			<div class="modal-form">
+            			<form action="../Class/add" method="POST"" >
+            				<label for="nameFaculty" class="modal-label">
+            					Tên Lớp
+            				</label>
+            				<br>
+					    	<input id="nameFaculty" type="text" required style="font-weight:bold" name="class_name" id="class_name" placeholder="Nhập tên lớp" class="modal-input">
+					    	<label for="nameFaculty" class="modal-label">
+            					Chọn Khoa
+            				</label>
+					    	<br>
+					    	<select name="facultyOption" id="facultyOption" class = "modal-option">
+							<%
+								for (int i=0; i<faculty.size(); i++) {
+	                    	%>
+	                    	<option value="<%= faculty.get(i).getId_faculty() %>"><%= faculty.get(i).getFaculty_name() %></option>
+	                   		<% 
+	                   			}
+	                   		%>
+	                    	</select>
+					<br>
+					    	<div class="wrapper-btn">
+							<input type="submit" id="ok" name="add_faculty" value="OK" class="btn" >
+							<input type="reset" name="reset" id="res" value="RESET" class="btn">
+							</div>
+						</form>
+						</div>
+            		</div>
+            	</div>
+            </div>
       </div>
+      <script type="text/javascript">
+     	const add = document.getElementById("add");
+     	const modal = document.querySelector(".modal");
+     	const closeBtn = document.querySelector(".modal-close");
+     	function showModal() {
+     		modal.classList.add("open");
+     	}
+     	function hideModal() {
+     		modal.classList.remove("open");
+     	}
+     	add.addEventListener('click',showModal);
+     	closeBtn.addEventListener('click', hideModal);
+     </script>
 </body>
 </html>

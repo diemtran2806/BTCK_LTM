@@ -31,4 +31,7 @@ public class StudentBO {
 	public static Map<Integer, String> getAllClass() {
 		return StudentDAO.getAllClass();
 	}
+	public static ArrayList<StudentView> getStudentListByClass(String value, int id_class){
+		return StudentDAO.getStudentListByClass(value, id_class);
+	}
 }

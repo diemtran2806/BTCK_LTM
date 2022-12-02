@@ -37,7 +37,7 @@ public class ClassDAO {
 		try {
 			Connection con = ConnectDatabase.getMySQLConnection();
 			Statement stmt = con.createStatement();
-			stmt.executeUpdate("insert into class values ("+cl.getId_class()+",'"+cl.getClass_name()+"',"
+			stmt.executeUpdate("insert into class(class_name, id_faculty) values ('"+cl.getClass_name()+"',"
 			+cl.getId_faculty()+")");
 			return true;
 		} catch (Exception e) {
