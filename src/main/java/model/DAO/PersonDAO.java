@@ -18,7 +18,10 @@ public class PersonDAO {
 	private static final String DELETE_PERSON = "DELETE FROM person WHERE id_person=?;";
 	private static final String GET_NAME_PERSON = "SELECT name FROM person where id_person=?;";
 	private static final String GET_ROLE_PERSON = "SELECT role FROM person where id_person=?;";
-
+	
+	//lvd
+	private static final String UPDATE_PASSWORD = "UPDATE person\r\n"
+												+ "SET password = ? WHERE id_person = ?;";
 	public static boolean checkLogin(int id, String password) {
 		try {
 			Connection con = ConnectDatabase.getMySQLConnection();
@@ -139,5 +142,18 @@ public class PersonDAO {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public static boolean updatePassword(int id, String password) {
+		try {
+			Connection con = ConnectDatabase.getMySQLConnection();
+			PreparedStatement psPerson = con.prepareStatement(UPDATE_PASSWORD);
+			psPerson.setInt(1, id);
+			psPerson.setString(2, password);
+			psPerson.executeUpdate();
+		} catch (Exception e) {
+			
+		}
+		return true;
 	}
 }

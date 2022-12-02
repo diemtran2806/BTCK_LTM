@@ -1,6 +1,10 @@
 package model.BO;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 import model.BEAN.Person;
+import model.DAO.ConnectDatabase;
 import model.DAO.PersonDAO;
 
 public class PersonBO {
@@ -22,5 +26,9 @@ public class PersonBO {
 	
 	public static boolean deletePerson(int id) {
 		return PersonDAO.deletePerson(id);
+	}
+	
+	public static boolean updatePassword(int id, String password) {
+		return PersonDAO.updatePassword(id,password);
 	}
 }

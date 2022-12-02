@@ -23,7 +23,26 @@ public class CheckLoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doPost(request, response);
+		String action = request.getPathInfo();
+
+		try {
+			switch (action) {
+			case "/login":
+				login(request, response);
+				break;
+			case "/logout":
+				logout(request, response);
+				break;
+			case "/changepassword":
+				changePasswordView(request, response);
+				break;
+			default:
+				break;
+			}
+		} catch (Exception ex) {
+			throw new ServletException(ex);
+		}
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -37,6 +56,9 @@ public class CheckLoginServlet extends HttpServlet {
 				break;
 			case "/logout":
 				logout(request, response);
+				break;
+			case "/changepassword":
+				changePasswordView(request, response);
 				break;
 			default:
 				break;
@@ -58,7 +80,7 @@ public class CheckLoginServlet extends HttpServlet {
 				request.getSession().setAttribute("role", person.getRole());
 				response.sendRedirect("../Home.jsp");
 			} else {
-				request.setAttribute("error", "Login failed! Please recheck the username and password and try again!");
+				request.setAttribute("error", "Đăng nhập không thành công \nVui lòng nhập lại tài khoản và mật khẩu!");
 				RequestDispatcher rd = request.getRequestDispatcher("../login.jsp");
 				rd.forward(request, response);
 			}
@@ -75,4 +97,16 @@ public class CheckLoginServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	
+
+	private void changePasswordView(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			RequestDispatcher rd = request.getRequestDispatcher("../UpdatePassword.jsp");
+			rd.forward(request, response);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 }
