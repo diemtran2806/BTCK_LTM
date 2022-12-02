@@ -5,28 +5,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>List Student</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/Table.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/Button.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/ListPage.css">
+	<title>List Student</title>
 </head>
 <body>
 	<div class="navbar">
         <jsp:include page="NavigationBar.jsp"></jsp:include>
     </div>
-	<form action="<%=request.getContextPath()%>/Student/search"
+    <div class="wrapper-content">
+	<form class="search-form" action="<%=request.getContextPath()%>/Student/search"
 		method="post">
-		<table>
-			<tr>
-				<td>Value:</td>
-				<td><input type="text" name="value" /></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Search" /></td>
-				<td><input type="reset" value="Reset" /></td>
-			</tr>
-		</table>
+		<input class="search" type="text" name="value" placeholder="Type here..." value="">
+		<button type="submit" class="btn">Search</button>
 	</form>
 	<form action="<%=request.getContextPath()%>/Student/deleteMany">
-		<table border="1">
+		<table  class="data" width='100%'>
+			<thead>
 			<tr>
 				<th>ID</th>
 				<th>Họ tên</th>
@@ -38,6 +35,8 @@
 				<th>Ngày sinh</th>
 				<th>Lớp</th>
 			</tr>
+			</thead>
+			<tbody>
 			<%
 			ArrayList<StudentView> studentList = (ArrayList<StudentView>) request.getAttribute("studentList");
 			for (int i = 0; i < studentList.size(); i++) {
@@ -62,15 +61,15 @@
 			<%
 			}
 			%>
-			<tr>
-				<td class="btn" colspan="12"><input type="submit"
-					value="Xóa"></td>
-			</tr>
+			</tbody>
 		</table>
+		<input class="btn" type="submit" value="Xóa">
+		<a href="<%=request.getContextPath()%>/Student/add"><button type="button" class="btn btn-add">Add</button></a>
 	</form>
 
-	<a href="<%=request.getContextPath()%>/Student/add">Add</a>
+	
 	
 	<c:if test="${not empty error}"> ${error} </c:if>
+	</div>
 </body>
 </html>

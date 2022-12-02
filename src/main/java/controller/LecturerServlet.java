@@ -137,6 +137,7 @@ public class LecturerServlet extends HttpServlet {
 			ArrayList<LecturerListView> lecturerList = null;
 			request.setCharacterEncoding("UTF-8");
 			if(request.getParameter("search")!=null) {
+				request.setAttribute("keysearch", request.getParameter("search"));
 				lecturerList = LecturerBO.getLecturerList(request.getParameter("search"));
 			}else {
 				lecturerList = LecturerBO.getLecturerList("");

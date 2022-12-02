@@ -1,0 +1,39 @@
+@charset "ISO-8859-1";
+body {
+  		font-family: "Poppins", sans-serif;	
+  		}
+  		
+		h4 {
+			text-align: center;
+			color: #283c4e;
+			margin: 8px 0 8px 0;
+			display:none;
+		}
+		
+		.search {
+			padding: 6px;
+			border: 1px solid #255783;
+			border-radius: 4px;
+			margin-right: 12px;
+		}
+		.search-form {
+			margin-top: 24px;
+    		text-align: right;
+    		margin-right: 32px;
+    		padding-top: 24px
+		}
+		.wrapper-content {
+			width:95%;
+			border-top-left-radius: 10px;
+			/* box-shadow: 0 0 50px 2px rgba(1, 1, 1, 0.6); */
+			box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+			margin: auto;
+			background-color: #f2f2f26e;
+			text-align:center;
+		}
+		button, input {
+			outline: none;
+    		border: none;
+		}
+		
+	

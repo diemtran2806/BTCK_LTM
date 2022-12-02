@@ -1,0 +1,16 @@
+@charset "ISO-8859-1";
+.btn {
+			background-color: #255783;
+			color: #fff;
+			padding: 10px 24px 10px 24px;
+			border-radius: 4px;
+		}
+		.btn:hover {
+			opacity: 0.8;
+			cursor: pointer;
+		}
+		.btn-add {
+			/* margin-left:32px;
+			margin-top: 12px; */
+			margin: 12px 12px 12px 32px;
+		}
