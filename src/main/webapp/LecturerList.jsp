@@ -6,37 +6,40 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Table.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/ListView.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/SearchFormBar.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/Table.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/Button.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/ListPage.css">
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container">
-		<form class="search_form" name="search_" method="post" action="./viewlist" onsubmit="return required()">     
-		    <input class="search_box" type="text" name="search" placeholder="Type here..." value=""><br>
-			<input class="search_button" type="submit" name="submit" value="search"/>
+	<div class="navbar">
+        <jsp:include page="NavigationBar.jsp"></jsp:include>
+    </div>
+	<div class="wrapper-content">
+		<form class="search-form" name="search_" method="post" action="./viewlist">     
+		    <input <% if (request.getAttribute("keysearch")!=null)  {%> value="<%= request.getAttribute("keysearch") %>"<% } %>
+		    		class="search" type="text" name="search" placeholder="Type here..." value="">
+			<button type="submit" class="btn">Search</button>
 		</form>
 		<form name="delete_form" method="post" action="./delete" onsubmit="return requiredDelete()">   
-			<div class="feature_button">
-				<a class="button" href="./new">Thêm</a>
-				<input class="button" type="submit" name="submit" value="Xóa"/>  
-			</div>
-			<div class="table">
-				<table>
-				  <tr>
-				  	<th><input type="checkbox" id="checkAll"></th>
-				    <th>Mã giảng viên</th>
-				    <th>Tên Giảng viên</th>
-				    <th>Số điện thoại</th>
-				    <th>Email</th>
-				    <th>CCCD</th>
-				    <th>Giới tính</th>
-				    <th>Địa chỉ</th>
-				    <th>Ngày sinh</th>
-				    <th>Khoa</th>
-				    <th>Cập nhật</th>
-				  </tr>
+			
+				<table  class="data" width='100%'>
+				  <thead>
+					  <tr>
+					  	<td><input type="checkbox" id="checkAll"></th>
+					    <td>Mã giảng viên</th>
+					    <td>Tên Giảng viên</th>
+					    <td>Số điện thoại</th>
+					    <td>Email</th>
+					    <td>CCCD</th>
+					    <td>Giới tính</th>
+					    <td>Địa chỉ</th>
+					    <td>Ngày sinh</th>
+					    <td>Khoa</th>
+					    <td>Cập nhật</th>
+					  </tr>
+				  </thead>
+				   <tbody>
 				  	<%
 						ArrayList<LecturerListView> lecturerList = (ArrayList<LecturerListView>)request.getAttribute("lecturerList");
 						for(int i = 0; i < lecturerList.size(); i++){
@@ -52,10 +55,14 @@
 						<td><%= lecturerList.get(i).getAddress() %></td>
 						<td><%= lecturerList.get(i).getDob() %></td>
 						<td><%= lecturerList.get(i).getFaculty_name() %></td>
-						<td><a href="./update?id=<%= lecturerList.get(i).getId_person()%>">Update</a></td>
+						<td><a href="./update?id=<%= lecturerList.get(i).getId_person()%>"><button type="button" class="btn">Update</button></a></td>
 					</tr>
-					<%} %>	
+					<%} %>
+					 </tbody>	
 				</table>
+			<div class="feature_button">
+				<a href="./new"><button type="button"  class="btn btn-add">Add</button></a>
+				<input class="btn" type="submit" name="submit" value="Xóa"/>  
 			</div>
 		</form>
 	</div>
