@@ -22,7 +22,7 @@
 			<input type='text' name='value' placeholder='Enter Text Search' class="search">
 			<button type="submit" class="btn">Search</button>
 		</form>
-		<form action="<%=request.getContextPath()%>/Admin/deleteMany">
+		<form action="<%=request.getContextPath()%>/Admin/deleteMany"  onsubmit="return requiredDelete()">
 			<table class="data" width='100%'>
 				<thead>
 				<tr>
@@ -37,7 +37,7 @@
 					<th>Lương</th>
 					<th>Cập nhật</th>
 					<th>Xóa</th>
-					<th>Xóa nhiều</th>
+					<th><input type="checkbox" id="checkAll"></th>
 				</tr>
 				</thead>
 				 <tbody>
@@ -59,7 +59,7 @@
 						href="<%=request.getContextPath()%>/Admin/update?id=<%=adminList.get(i).getId_person()%>"><button class="btn" type="button">Update</button></a></td>
 					<td><a
 						href="<%=request.getContextPath()%>/Admin/delete?id=<%=adminList.get(i).getId_person()%>"><button class="btn" type="button">Delete</button></a></td>
-					<td><input type="checkbox" name="delete"
+					<td><input type="checkbox" name="delete" class="delete" 
 						value="<%=adminList.get(i).getId_person()%>"></td>
 				</tr>
 				<%
@@ -67,7 +67,7 @@
 				%>
 				</tbody>
 			</table>
-			<a href="<%=request.getContextPath()%>/Admin/add"><button type="button" class="btn btn-add">Add</button></a>
+			<a href="<%=request.getContextPath()%>/Admin/add"><button type="button" class="btn">Add</button></a>
 			<input class="btn" type="submit" value="Xóa">
 		</form>
 	
@@ -75,5 +75,43 @@
 		
 		<c:if test="${not empty error}"> ${error} </c:if>
 	</div>
+	<script>
+	  let checkall = document.getElementById("checkAll");
+	  const checkbox = document.getElementsByClassName("delete");
+	  checkall.onclick = function() { 
+	    if(checkall.checked){
+	      for (let i = 0; i < checkbox.length; i++) {
+	        checkbox[i].checked = true;
+	      }
+	    }else{
+	      for (let i = 0; i < checkbox.length; i++) {
+	        checkbox[i].checked = false;
+	      }
+	    }
+	  };
+	  
+	function requiredDelete(){
+		let checked = false;
+		for (let i = 0; i < checkbox.length; i++) {
+	        if(checkbox[i].checked){
+	        	checked = true;
+	        	break;
+	        };
+      	}
+		if(checked){
+			let text = "Bạn chắc chắn muốn xóa?";
+		    if (confirm(text) == true) {
+		      return true;
+		    } else {
+		      return false;
+		    }
+		}
+		else{
+			alert("Bạn chưa chọn người nào!");
+			return false;
+		}
+	}
+	    
+	</script>
 </body>
 </html>

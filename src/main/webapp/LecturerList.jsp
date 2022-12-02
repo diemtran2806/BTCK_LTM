@@ -26,17 +26,17 @@
 				<table  class="data" width='100%'>
 				  <thead>
 					  <tr>
-					  	<td><input type="checkbox" id="checkAll"></th>
-					    <td>Mã giảng viên</th>
-					    <td>Tên Giảng viên</th>
-					    <td>Số điện thoại</th>
-					    <td>Email</th>
-					    <td>CCCD</th>
-					    <td>Giới tính</th>
-					    <td>Địa chỉ</th>
-					    <td>Ngày sinh</th>
-					    <td>Khoa</th>
-					    <td>Cập nhật</th>
+					  	<th><input type="checkbox" id="checkAll"></th>
+					    <th>Mã giảng viên</th>
+					    <th>Tên Giảng viên</th>
+					    <th>Số điện thoại</th>
+					    <th>Email</th>
+					    <th>CCCD</th>
+					    <th>Giới tính</th>
+					    <th>Địa chỉ</th>
+					    <th>Ngày sinh</th>
+					    <th>Khoa</th>
+					    <th>Cập nhật</th>
 					  </tr>
 				  </thead>
 				   <tbody>
@@ -61,7 +61,7 @@
 					 </tbody>	
 				</table>
 			<div class="feature_button">
-				<a href="./new"><button type="button"  class="btn btn-add">Add</button></a>
+				<a href="./new"><button type="button"  class="btn">Add</button></a>
 				<input class="btn" type="submit" name="submit" value="Xóa"/>  
 			</div>
 		</form>

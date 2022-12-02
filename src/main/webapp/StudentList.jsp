@@ -21,7 +21,7 @@
 		<input class="search" type="text" name="value" placeholder="Type here..." value="">
 		<button type="submit" class="btn">Search</button>
 	</form>
-	<form action="<%=request.getContextPath()%>/Student/deleteMany">
+	<form action="<%=request.getContextPath()%>/Student/deleteMany" onsubmit="return requiredDelete()">
 		<table  class="data" width='100%'>
 			<thead>
 			<tr>
@@ -35,8 +35,7 @@
 				<th>Ngày sinh</th>
 				<th>Lớp</th>
 				<th>Cập nhật</th>
-				<th>Xóa</th>
-				<th>Xóa nhiều</th>
+				<th>Xóa</th><th><input type="checkbox" id="checkAll"></th>
 			</tr>
 			</thead>
 			<tbody>
@@ -67,12 +66,48 @@
 			</tbody>
 		</table>
 		<input class="btn" type="submit" value="Xóa">
-		<a href="<%=request.getContextPath()%>/Student/add"><button type="button" class="btn btn-add">Add</button></a>
+		<a href="<%=request.getContextPath()%>/Student/add"><button type="button" class="btn">Add</button></a>
 	</form>
 
-	
-	
 	<c:if test="${not empty error}"> ${error} </c:if>
 	</div>
+	<script>
+	  let checkall = document.getElementById("checkAll");
+	  const checkbox = document.getElementsByClassName("delete");
+	  checkall.onclick = function() { 
+	    if(checkall.checked){
+	      for (let i = 0; i < checkbox.length; i++) {
+	        checkbox[i].checked = true;
+	      }
+	    }else{
+	      for (let i = 0; i < checkbox.length; i++) {
+	        checkbox[i].checked = false;
+	      }
+	    }
+	  };
+	  
+	function requiredDelete(){
+		let checked = false;
+		for (let i = 0; i < checkbox.length; i++) {
+	        if(checkbox[i].checked){
+	        	checked = true;
+	        	break;
+	        };
+      	}
+		if(checked){
+			let text = "Bạn chắc chắn muốn xóa?";
+		    if (confirm(text) == true) {
+		      return true;
+		    } else {
+		      return false;
+		    }
+		}
+		else{
+			alert("Bạn chưa chọn người nào!");
+			return false;
+		}
+	}
+	    
+	</script>
 </body>
 </html>
