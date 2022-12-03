@@ -10,6 +10,7 @@
 	<div class="navbar">
         <jsp:include page="NavigationBar.jsp"></jsp:include>
     </div>
+    
 	<form action="<%=request.getContextPath()%>/Admin/add" method="post">
 		<table>
 			<tr>

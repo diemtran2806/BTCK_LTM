@@ -135,6 +135,9 @@ public class LecturerServlet extends HttpServlet {
 	private void viewLecturerList(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 			ArrayList<LecturerListView> lecturerList = null;
+			ArrayList<Faculty> facultyList = null;
+			facultyList = FacultyBO.getAllFaculty();
+			request.setAttribute("facultyList", facultyList);
 			request.setCharacterEncoding("UTF-8");
 			if(request.getParameter("search")!=null) {
 				request.setAttribute("keysearch", request.getParameter("search"));

@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/Table.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/Button.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/ListPage.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fonts/fontawesome-free-6.2.1/css/all.min.css">
 </head>
 <body>
 	<div class="navbar">
@@ -30,10 +31,10 @@
             <table width='100%'>
                 <thead>
                     <tr>
-                        <td>ID Faculty</th>
-                        <td>Faculty Name</th>
-                        <td>Update</th>
-                        <td>Details</th>
+                        <td>Mã Khoa</th>
+                        <td>Tên Khoa</th>
+                        <td>Cập Nhật</th>
+                        <td>Chi Tiết</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,8 +51,8 @@
 	                    <tr>
 	                    	<td><%= faculty.get(i).getId_faculty() %></td>
 	                    	<td><%= faculty.get(i).getFaculty_name() %></td>
-	                    	<td><a href="./update?update=<%=faculty.get(i).getId_faculty() %>"><button type="button" class="btn">Update</button></a>
-	                    	<td><a href="./details?details=<%=faculty.get(i).getId_faculty() %>"><button type="button" class="btn">Chi tiết</button></a>
+	                    	<td><a href="./update?update=<%=faculty.get(i).getId_faculty() %>"><button type="button"><i class="update-icon fa-solid fa-pen-to-square"></i></button></a>
+	                    	<td><a href="./details?details=<%=faculty.get(i).getId_faculty() %>"><button type="button"><i class="update-icon fa-solid fa-circle-info"></i></button></a>
 	                   	</tr>
 	                   	<% 
 	                   	}

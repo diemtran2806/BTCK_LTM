@@ -74,10 +74,10 @@ public class CheckLoginServlet extends HttpServlet {
 	private void login(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String password = request.getParameter("password");
-
 		try {
 			if (PersonBO.isValidUser(id, password)) {
 				Person person = PersonBO.getPersonById(id);
+				request.getSession().setAttribute("id", person.getId_person());
 				request.getSession().setAttribute("name", person.getName());
 				request.getSession().setAttribute("role", person.getRole());
 				response.sendRedirect("../Home.jsp");
@@ -89,6 +89,7 @@ public class CheckLoginServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	private void logout(HttpServletRequest request, HttpServletResponse response) {

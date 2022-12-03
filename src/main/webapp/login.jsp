@@ -15,9 +15,9 @@
 	<div class="navbar">
 		<jsp:include page="NavigationBar.jsp"></jsp:include>
 	</div>
-	<div class="wapper-login">
+	<div class="wapper-login size-wrapper">
 	<div class="container login">
-			<header class="modal-header">Login</header>
+			<header class="modal-header">Đăng Nhập</header>
 			<div class="modal-body">
 				<div class="modal-form">
 					<form action="<%=request.getContextPath()%>/Auth/login" method="post">
