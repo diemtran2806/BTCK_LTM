@@ -19,11 +19,17 @@ public class AdminBO {
 		return AdminDAO.getAdminViewById(id);
 	}
 	
-	public static boolean createAdmin(Admin admin) {
-		return AdminDAO.createAdmin(admin);
+	public static String createAdmin(Admin admin) {
+		String error = PersonBO.checkDuplicate(admin.getPhone(), admin.getEmail(), 0);
+		if(!error.equals("")) return error;
+		if(!AdminDAO.createAdmin(admin)) return "Something went wrong!";
+		return "";
 	}
 	
-	public static boolean updateAdmin(Admin admin) {
-		return AdminDAO.updateAdmin(admin);
+	public static String updateAdmin(Admin admin) {
+		String error = PersonBO.checkDuplicate(admin.getPhone(), admin.getEmail(), admin.getId_person());
+		if(!error.equals("")) return error;
+		if(!AdminDAO.updateAdmin(admin)) return "Something went wrong!";
+		return "";
 	}
 }

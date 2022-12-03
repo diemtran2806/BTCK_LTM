@@ -23,7 +23,6 @@ import model.BO.StudentBO;
 @WebServlet("/Class/*")
 public class ClassServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
     public ClassServlet() {
         super();
         // TODO Auto-generated constructor stub

@@ -27,7 +27,7 @@
 					<br>
 					<p id="notication"></p>
 					<div class="wrapper-btn">
-						<input class="btn" type="submit" name="submit" value="Update"/>
+						<input id="update" class="btn" type="submit" name="submit" value="Update"/>
 	    			</div>
 				</form>
 		    	<div id="error" class="error">
@@ -41,14 +41,16 @@
 	    const pw1 = document.getElementById("pw1");
 		const pw2 = document.getElementById("pw2");
 		const notic = document.getElementById("notication");
+		const btnUpdate = document.getElementById("update");
 		
 		pw2.addEventListener('blur', (event) => {
 	    	if(pw1.value.localeCompare(pw2.value)){
-
 	    		notic.innerHTML = "Mật khẩu không khớp!";
+	    		btnUpdate.disabled = true;
 	    	}	
 			else{
 				notic.innerHTML ="";
+				btnUpdate.disabled = false;
 			} 
 		 });
 	</script>

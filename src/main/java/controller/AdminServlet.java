@@ -16,6 +16,7 @@ import model.BEAN.Admin;
 import model.BEAN.AdminView;
 import model.BO.AdminBO;
 import model.BO.PersonBO;
+import utils.PasswordAuthentication;
 
 @WebServlet("/Admin/*")
 public class AdminServlet extends HttpServlet {
@@ -29,23 +30,18 @@ public class AdminServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getPathInfo();
+		RequestDispatcher rd;
 
 		try {
 			switch (action) {
 			case "/viewlist":
-				ArrayList<AdminView> adminList = AdminBO.getAdminList("");
-				request.setAttribute("adminList", adminList);
-				RequestDispatcher rd = request.getRequestDispatcher("/AdminList.jsp");
-				rd.forward(request, response);
+				viewList(request, response);
 				break;
 			case "/add":
 				response.sendRedirect("../CreateAdmin.jsp");
 				break;
 			case "/update":
-				AdminView admin = AdminBO.getAdminViewById(Integer.parseInt(request.getParameter("id")));
-				request.setAttribute("admin", admin);
-				rd = request.getRequestDispatcher("/UpdateAdmin.jsp");
-				rd.forward(request, response);
+				showUpdateForm(request, response);
 				break;
 			default:
 				doPost(request, response);
@@ -96,6 +92,20 @@ public class AdminServlet extends HttpServlet {
 			throw new ServletException(ex);
 		}
 	}
+	
+	private void viewList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<AdminView> adminList = AdminBO.getAdminList("");
+		request.setAttribute("adminList", adminList);
+		RequestDispatcher rd = request.getRequestDispatcher("/AdminList.jsp");
+		rd.forward(request, response);
+	}
+	
+	private void showUpdateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		AdminView admin = AdminBO.getAdminViewById(Integer.parseInt(request.getParameter("id")));
+		request.setAttribute("admin", admin);
+		RequestDispatcher rd = request.getRequestDispatcher("/UpdateAdmin.jsp");
+		rd.forward(request, response);
+	}
 
 	private void add(HttpServletRequest request, HttpServletResponse response) {
 		String name = request.getParameter("name");
@@ -107,17 +117,22 @@ public class AdminServlet extends HttpServlet {
 		String gender = request.getParameter("gender");
 		String address = request.getParameter("address");
 		String dob = request.getParameter("dob");
-		String img = request.getParameter("img");
+		String img = "default.png";
 		String salary = request.getParameter("salary");
-		ArrayList<AdminView> adminList = null;
+		
+		PasswordAuthentication hashPass = new PasswordAuthentication(15);
+		@SuppressWarnings("deprecation")
+		String pass = hashPass.hash(password);
 
 		try {
-			if (AdminBO.createAdmin(new Admin(0, name, password, role, phone, email, cccd, gender.equals("1"), address,
-					Date.valueOf(dob),img, Integer.parseInt(salary)))) {
+			String result = AdminBO.createAdmin(new Admin(0, name, pass, role, phone, email, cccd, gender.equals("1"), address,
+					Date.valueOf(dob),img, Integer.parseInt(salary)));
+			if (result.equals("")) {
 				response.sendRedirect("./viewlist");
 			} else {
-				request.setAttribute("error", "Something went wrong!");
-				response.sendRedirect("./viewlist");
+				request.setAttribute("err", result);
+				RequestDispatcher rd = request.getRequestDispatcher("../CreateAdmin.jsp");
+				rd.forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -125,7 +140,7 @@ public class AdminServlet extends HttpServlet {
 	}
 
 	private void update(HttpServletRequest request, HttpServletResponse response) {
-		String id = request.getParameter("id_person");
+		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String password = "";
 		String role = "student";
@@ -137,15 +152,15 @@ public class AdminServlet extends HttpServlet {
 		String dob = request.getParameter("dob");
 		String img = request.getParameter("img");
 		String salary = request.getParameter("salary");
-		ArrayList<AdminView> adminList = null;
 
 		try {
-			if (AdminBO.updateAdmin(new Admin(Integer.parseInt(id), name, password, role, phone, email, cccd,
-					gender.equals("1"), address, Date.valueOf(dob),img, Integer.parseInt(salary)))) {
+			String result = AdminBO.updateAdmin(new Admin(Integer.parseInt(id), name, password, role, phone, email, cccd,
+					gender.equals("1"), address, Date.valueOf(dob),img, Integer.parseInt(salary)));
+			if (result.equals("")) {
 				response.sendRedirect("./viewlist");
 			} else {
-				request.setAttribute("error", "Something went wrong!");
-				response.sendRedirect("./viewlist");
+				request.setAttribute("err", result);
+				showUpdateForm(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
