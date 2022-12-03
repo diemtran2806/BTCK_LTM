@@ -21,6 +21,7 @@
 	<div class="wrapper-add-del">
 	
 	<button type="button" id="add" class="btn btn-add">Add</button>
+	</div>		
 	</div>
 	<form class="search-form" action="<%=request.getContextPath()%>/Student/search"
 		method="post">
@@ -63,15 +64,12 @@
 				<td><%=studentList.get(i).getAddress()%></td>
 				<td><%=studentList.get(i).getDob()%></td>
 				<td><%=studentList.get(i).getClass_name()%></td>
-				<td><a
-					href="<%=request.getContextPath()%>/Student/update?id=<%=studentList.get(i).getId_person()%>"><button type="button"><i class="update-icon fa-solid fa-pen-to-square"></i></button></a></td>
-				<td><a
-					href="<%=request.getContextPath()%>/Student/delete?id=<%=studentList.get(i).getId_person()%>"><button type="button"><i class="update-icon fa-solid fa-trash"></i></button></a></td>
+				<td><a href="<%=request.getContextPath()%>/Student/update?id=<%=studentList.get(i).getId_person()%>"><button type="button"><i class="update-icon fa-solid fa-pen-to-square"></i></button></a></td>
+				<td><a href="<%=request.getContextPath()%>/Student/delete?id=<%=studentList.get(i).getId_person()%>"><button type="button"><i class="update-icon fa-solid fa-trash"></i></button></a></td>
 			</tr>
 			<%
 			}
 			%>
-			
 			</tbody>
 		</table>
 		<input class="btn btn-del" type="submit" value="Xóa">

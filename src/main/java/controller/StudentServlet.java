@@ -1,5 +1,10 @@
 package controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -7,6 +12,7 @@ import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +42,9 @@ public class StudentServlet extends HttpServlet {
 			case "/viewlist":
 				ArrayList<StudentView> studentList = StudentBO.getStudentList("");
 				request.setAttribute("studentList", studentList);
+				String path = request.getServletContext().getRealPath("/");
+				FileInputStream fin = new FileInputStream(path + File.separator + "public\\img\\");
+				request.setAttribute("img", fin);
 				RequestDispatcher rd = request.getRequestDispatcher("/StudentList.jsp");
 				rd.forward(request, response);
 				break;
@@ -101,6 +110,28 @@ public class StudentServlet extends HttpServlet {
 		}
 	}
 
+	private void displayImg(HttpServletRequest request, HttpServletResponse response, String fileName) throws IOException {
+		response.setContentType("image/jpeg");
+		ServletOutputStream out;
+		out = response.getOutputStream();
+		
+		String path = request.getServletContext().getRealPath("/");
+		FileInputStream fin = new FileInputStream(path + File.separator + "public\\img\\" + fileName);
+
+		BufferedInputStream bin = new BufferedInputStream(fin);
+		BufferedOutputStream bout = new BufferedOutputStream(out);
+		int ch = 0;
+		;
+		while ((ch = bin.read()) != -1) {
+			bout.write(ch);
+		}
+
+		bin.close();
+		fin.close();
+		bout.close();
+		out.close();
+	}
+
 	private void add(HttpServletRequest request, HttpServletResponse response) {
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
@@ -117,7 +148,7 @@ public class StudentServlet extends HttpServlet {
 
 		try {
 			if (StudentBO.createStudent(new Student(0, name, password, role, phone, email, cccd, gender.equals("1"),
-					address, Date.valueOf(dob),img, Integer.parseInt(id_role)))) {
+					address, Date.valueOf(dob), img, Integer.parseInt(id_role)))) {
 				response.sendRedirect("./viewlist");
 			} else {
 				request.setAttribute("error", "Something went wrong!");
@@ -145,7 +176,7 @@ public class StudentServlet extends HttpServlet {
 
 		try {
 			if (StudentBO.updateStudent(new Student(Integer.parseInt(id), name, password, role, phone, email, cccd,
-					gender.equals("1"), address, Date.valueOf(dob),img, Integer.parseInt(id_role)))) {
+					gender.equals("1"), address, Date.valueOf(dob), img, Integer.parseInt(id_role)))) {
 				response.sendRedirect("./viewlist");
 			} else {
 				request.setAttribute("error", "Something went wrong!");
