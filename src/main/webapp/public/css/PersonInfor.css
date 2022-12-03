@@ -1,0 +1,38 @@
+@charset "ISO-8859-1";
+.inputfile {
+ 		opacity: 0; 
+ 		overflow: hidden; 
+ 		position: absolute; 
+ 		z-index: -1; 
+ 	} 
+	
+	.inputfile + label {
+		padding:5px 6px 8px 6px;
+		border-radius: 50%;
+		width:37px;
+	    background-color: #255783;
+	    color: white;
+	    display: inline-block;
+	}	
+
+	.inputfile:focus + label,
+	.inputfile + label:hover {
+	    background-color: #255783;
+	}
+		
+	.inputfile + label {
+		cursor: pointer; /* "hand" cursor */
+	}
+	
+	.inputfile:focus + label {
+		outline: 1px dotted #000;
+		outline: -webkit-focus-ring-color auto 5px;
+	}
+	
+	.inputfile + label * {
+		pointer-events: none;
+	}
+	
+	img{
+		border-radius:50%;
+	}

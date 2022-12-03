@@ -19,6 +19,9 @@
 	href="${pageContext.request.contextPath}/public/css/ListPage.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/public/css/Button.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.0/css/all.min.css" integrity="sha512-3PN6gfRNZEX4YFyz+sIyTF6pGlQiryJu9NlGhu9LrLMQ7eDjNgudQoFDK3WSNAayeIKc6B8WXXpo4a7HqxjKwg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/public/css/PersonInfor.css">
 </head>
 <body>
 	<div class="navbar">
@@ -36,7 +39,8 @@
 						src="<%=request.getContextPath()%>/public/img/${img }">
 					</div>
 					<form method="post" action="./upload" enctype="multipart/form-data">
-						<input type="file" name="file" class="choose-file"/> 
+						<input type="file" name="file" id="file" class="inputfile" />
+						<label for="file" id="choose_label"><i class="fas fa-cloud-upload-alt"></i></label>
 						<input type="submit" value="Upload" class="btn"/>
 					</form>
 					</div>
@@ -161,5 +165,22 @@
 		</div>
 	</div>
 	<c:if test="${not empty err}"> ${err} </c:if>
+	<script>
+	const output = document.getElementById('choose_label');
+	const filepicker = document.getElementById('file');
+
+	filepicker.addEventListener('change', (event) => {
+			
+		  const files = event.target.files;
+		  for (const file of files) {
+		  const check = document.createElement('i');
+			check.classList.add("fas");
+			check.classList.add("fa-check");
+		    output.innerHTML = "";
+		    output.appendChild(check);
+		  }
+		})
+       
+    </script>
 </body>
 </html>
