@@ -20,12 +20,18 @@ public class StudentBO {
 		return StudentDAO.getStudentViewById(id);
 	}
 	
-	public static boolean createStudent(Student student) {
-		return StudentDAO.createStudent(student);
+	public static String createStudent(Student student) {
+		String error = PersonBO.checkDuplicate(student.getPhone(), student.getEmail(), 0);
+		if(!error.equals("")) return error;
+		if(!StudentDAO.createStudent(student)) return "Something went wrong!";
+		return "";
 	}
 	
-	public static boolean updateStudent(Student student) {
-		return StudentDAO.updateStudent(student);
+	public static String updateStudent(Student student) {
+		String error = PersonBO.checkDuplicate(student.getPhone(), student.getEmail(), student.getId_person());
+		if(!error.equals("")) return error;
+		if(!StudentDAO.updateStudent(student)) return "Something went wrong!";
+		return "";
 	}
 	
 	public static Map<Integer, String> getAllClass() {

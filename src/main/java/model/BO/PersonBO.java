@@ -12,6 +12,16 @@ public class PersonBO {
 		return PersonDAO.checkLogin(id, password);
 	}
 	
+	public static String checkDuplicate(String phone, String email, int id) {
+		if(PersonDAO.checkPhoneNumberDuplicate(phone, id)) return "Số điện thoại này đã được sử dụng!";
+		if(PersonDAO.checkEmailDuplicate(email, id)) return "Email này đã được sử dụng!";
+		return "";
+	}
+	
+	public static String getPassPerson(int id) {
+		return PersonDAO.getPassPerson(id);
+	}
+	
 	public static String getNamePerson(int id) {
 		return PersonDAO.getNamePerson(id);
 	}
@@ -22,6 +32,13 @@ public class PersonBO {
 	
 	public static Person getPersonById(int id) {
 		return PersonDAO.getPersonById(id);
+	}
+	
+	public static String updatePerson(Person person) {
+		String error = checkDuplicate(person.getPhone(), person.getEmail(), person.getId_person());
+		if(!error.equals("")) return error;
+		if(!PersonDAO.updatePerson(person)) return "Something went wrong!";
+		return "";
 	}
 	
 	public static boolean deletePerson(int id) {

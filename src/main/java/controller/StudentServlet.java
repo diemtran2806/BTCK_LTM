@@ -1,23 +1,34 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import model.BEAN.Student;
 import model.BEAN.StudentView;
 import model.BO.PersonBO;
 import model.BO.StudentBO;
 
+import utils.*;
+
 @WebServlet("/Student/*")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
+		maxFileSize = 1024 * 1024 * 10, // 10 MB
+		maxRequestSize = 1024 * 1024 * 100 // 100 MB
+)
 public class StudentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -29,29 +40,18 @@ public class StudentServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getPathInfo();
-//		System.out.println(action);
+//		System.out.print(Thread.currentThread().getContextClassLoader().getResource("").getPath()); 
 
 		try {
 			switch (action) {
 			case "/viewlist":
-				ArrayList<StudentView> studentList = StudentBO.getStudentList("");
-				request.setAttribute("studentList", studentList);
-				RequestDispatcher rd = request.getRequestDispatcher("/StudentList.jsp");
-				rd.forward(request, response);
+				viewList(request, response);
 				break;
 			case "/add":
-				response.sendRedirect("../CreateStudent.jsp");
+				viewFormAdd(request, response);
 				break;
 			case "/update":
-				StudentView student = StudentBO.getStudentViewById(Integer.parseInt(request.getParameter("id")));
-				request.setAttribute("student", student);
-				Map<Integer, String> classes = StudentBO.getAllClass();
-				request.setAttribute("classes", classes);
-				rd = request.getRequestDispatcher("../UpdateStudent.jsp");
-				rd.forward(request, response);
-				break;
-			default:
-				doPost(request, response);
+				viewFormUpdate(request, response);
 				break;
 			}
 		} catch (Exception ex) {
@@ -65,7 +65,6 @@ public class StudentServlet extends HttpServlet {
 		String action = request.getPathInfo();
 		RequestDispatcher rd;
 		ArrayList<StudentView> studentList = null;
-//		System.out.println(action);
 
 		try {
 			switch (action) {
@@ -92,16 +91,40 @@ public class StudentServlet extends HttpServlet {
 			case "/deleteMany":
 				deleteMany(request, response);
 				break;
-			default:
-				doGet(request, response);
-				break;
 			}
 		} catch (Exception ex) {
 			throw new ServletException(ex);
 		}
 	}
+	
+	private void viewList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<StudentView> studentList = StudentBO.getStudentList("");
+		request.setAttribute("studentList", studentList);
+		RequestDispatcher rd = request.getRequestDispatcher("/StudentList.jsp");
+		rd.forward(request, response);
+	}
+	
+	private void viewFormAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Map<Integer, String> classes;
+		RequestDispatcher rd;
+		classes = StudentBO.getAllClass();
+		request.setAttribute("classes", classes);
+		rd = request.getRequestDispatcher("../CreateStudent.jsp");
+		rd.forward(request, response);
+	}
+	
+	private void viewFormUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Map<Integer, String> classes;
+		RequestDispatcher rd;
+		StudentView student = StudentBO.getStudentViewById(Integer.parseInt(request.getParameter("id")));
+		request.setAttribute("student", student);
+		classes = StudentBO.getAllClass();
+		request.setAttribute("classes", classes);
+		rd = request.getRequestDispatcher("../UpdateStudent.jsp");
+		rd.forward(request, response);
+	}
 
-	private void add(HttpServletRequest request, HttpServletResponse response) {
+	private void add(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 		String role = "student";
@@ -111,16 +134,19 @@ public class StudentServlet extends HttpServlet {
 		String gender = request.getParameter("gender");
 		String address = request.getParameter("address");
 		String dob = request.getParameter("dob");
-		String img = request.getParameter("img");
+		String img = "default.png";
 		String id_role = request.getParameter("id_role");
-		ArrayList<StudentView> studentList = null;
-
+		PasswordAuthentication hashPass = new PasswordAuthentication(15);
+		@SuppressWarnings("deprecation")
+		String pass = hashPass.hash(password);
+		
 		try {
-			if (StudentBO.createStudent(new Student(0, name, password, role, phone, email, cccd, gender.equals("1"),
-					address, Date.valueOf(dob),img, Integer.parseInt(id_role)))) {
-				response.sendRedirect("./viewlist");
+			String result = StudentBO.createStudent(new Student(0, name, pass, role, phone, email, cccd, gender.equals("1"),
+					address, Date.valueOf(dob), img, Integer.parseInt(id_role)));	
+			if (!result.equals("")) {
+				request.setAttribute("err", result);
+				viewFormAdd(request, response);
 			} else {
-				request.setAttribute("error", "Something went wrong!");
 				response.sendRedirect("./viewlist");
 			}
 		} catch (Exception e) {
@@ -129,7 +155,7 @@ public class StudentServlet extends HttpServlet {
 	}
 
 	private void update(HttpServletRequest request, HttpServletResponse response) {
-		String id = request.getParameter("id_person");
+		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String password = "";
 		String role = "student";
@@ -140,15 +166,15 @@ public class StudentServlet extends HttpServlet {
 		String address = request.getParameter("address");
 		String dob = request.getParameter("dob");
 		String img = request.getParameter("img");
-		String id_role = request.getParameter("id_role");
-		ArrayList<StudentView> studentList = null;
+		String id_class = request.getParameter("id_class");
 
 		try {
-			if (StudentBO.updateStudent(new Student(Integer.parseInt(id), name, password, role, phone, email, cccd,
-					gender.equals("1"), address, Date.valueOf(dob),img, Integer.parseInt(id_role)))) {
-				response.sendRedirect("./viewlist");
+			String result = StudentBO.updateStudent(new Student(Integer.parseInt(id), name, password, role, phone, email, cccd,
+					gender.equals("1"), address, Date.valueOf(dob), img, Integer.parseInt(id_class)));
+			if (!result.equals("")) {
+				request.setAttribute("err", result);
+				viewFormUpdate(request, response);
 			} else {
-				request.setAttribute("error", "Something went wrong!");
 				response.sendRedirect("./viewlist");
 			}
 		} catch (Exception e) {

@@ -1,20 +1,18 @@
 package model.BO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.BEAN.Lecturer;
 import model.BEAN.LecturerListView;
-import model.DAO.ConnectDatabase;
 import model.DAO.LecturerDAO;
 
 public class LecturerBO {
 
-	public static boolean createLecturer(Lecturer Lecturer){
-		return LecturerDAO.createLecturer(Lecturer); 
+	public static String createLecturer(Lecturer Lecturer){
+		String error = PersonBO.checkDuplicate(Lecturer.getPhone(), Lecturer.getEmail(), 0);
+		if(!error.equals("")) return error;
+		if(!LecturerDAO.createLecturer(Lecturer)) return "Something went wrong!";
+		return ""; 
 	}
 	
 	public static ArrayList<LecturerListView> getLecturerList(String username){
@@ -25,12 +23,11 @@ public class LecturerBO {
 		return LecturerDAO.getLecturerById(id_lecturer);
 	}
 	
-	public static boolean updateLecturer(Lecturer Lecturer){
-		return LecturerDAO.updateLecturer(Lecturer);
-	}
-	
-	public static boolean deleteLecturer(int id_lecturer){
-		return LecturerDAO.deleteLecturer(id_lecturer);
+	public static String updateLecturer(Lecturer Lecturer){
+		String error = PersonBO.checkDuplicate(Lecturer.getPhone(), Lecturer.getEmail(), Lecturer.getId_person());
+		if(!error.equals("")) return error;
+		if(!LecturerDAO.updateLecturer(Lecturer)) return "Something went wrong!";
+		return ""; 
 	}
 	public static LecturerListView getLecturerViewById(int id) {
 		return LecturerDAO.getLecturerViewById(id);

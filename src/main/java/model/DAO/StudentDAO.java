@@ -51,6 +51,7 @@ public class StudentDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 		return true;
 	}
@@ -125,6 +126,7 @@ public class StudentDAO {
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
+			return null;
 		}
 		return null;
 	}
@@ -144,6 +146,7 @@ public class StudentDAO {
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
+			return null;
 		}
 		return null;
 	}
@@ -160,6 +163,7 @@ public class StudentDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 		return false;
 	}
