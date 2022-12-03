@@ -30,12 +30,16 @@
 			<header class="modal-header">Thông Tin Cá Nhân</header>
 			<div class="modal-body">
 				<div class="modal-form">
-					<form method="post" action="./upload" enctype="multipart/form-data">
-						<input type="file" name="file" /> <input type="submit"
-							value="Upload" />
-					</form>
+					<div class="upload-img">
+					<div class="infor-img">
 					<img alt="default" width="60" height="60"
 						src="<%=request.getContextPath()%>/public/img/${img }">
+					</div>
+					<form method="post" action="./upload" enctype="multipart/form-data">
+						<input type="file" name="file" class="choose-file"/> 
+						<input type="submit" value="Upload" class="btn"/>
+					</form>
+					</div>
 					<form action="<%=request.getContextPath()%>/Me/update" method="post">
 						<%
 						String role = (String) session.getAttribute("role");

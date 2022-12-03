@@ -165,8 +165,7 @@ header.modal-header {
 	font-size: 14px;
 }
 
-@
-keyframes modalFadeIn {from { transform:translateY(-140px);
+@keyframes modalFadeIn {from { transform:translateY(-140px);
 	
 }
 
@@ -224,4 +223,26 @@ i.update-icon {
 i.update-icon:hover {
 	color: blue;
 	cursor: pointer;
+}
+
+
+.upload-img {
+	width:100%;
+	text-align: center;
+}
+
+.infor-img img {
+	
+	height: 92px;
+    width: 92px;
+}
+
+.view-img img{
+	border-radius: 50%;
+}
+
+input.choose-file {
+	border: none;
+	background: none;
+	color:#fff;
 }

@@ -137,7 +137,7 @@ public class MeServlet extends HttpServlet {
 	private void upload(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		Part filePart = request.getPart("file");
 		String fileName = filePart.getSubmittedFileName();
-		String path = request.getServletContext().getRealPath("/resources/img");
+		String path = request.getServletContext().getRealPath("/public/img");
 		String realPath = path.split(".metadata")[0] + request.getContextPath().split("/")[1]
 				+ "\\src\\main\\webapp\\public\\img";
 		if (!Files.exists(Paths.get(path))) {

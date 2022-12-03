@@ -84,8 +84,8 @@
 						<%
 						}
 						%>
-						<td><img alt="default" width="42" height="42"
-							src="<%=request.getContextPath()%>/public/img/<%=studentList.get(i).getImg()%>"></td>
+						<td><div class="view-img"><img alt="default" width="42" height="42"
+							src="<%=request.getContextPath()%>/public/img/<%=studentList.get(i).getImg()%>"></div></td>
 						<td><%=studentList.get(i).getId_person()%></td>
 						<td><%=studentList.get(i).getName()%></td>
 						<td><%=studentList.get(i).getPhone()%></td>
