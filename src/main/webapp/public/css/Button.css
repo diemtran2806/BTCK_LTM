@@ -14,3 +14,12 @@
 			height: 32px;
 			margin-top: 48px;
 		}
+		.btn-custom {
+			margin-top: 24px;
+			margin-left: 32px;
+			height: 32px;
+		}
+		.wrapper-btn-addDel {
+		display: flex;
+	}
+	

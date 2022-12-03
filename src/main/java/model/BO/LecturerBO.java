@@ -32,4 +32,7 @@ public class LecturerBO {
 	public static boolean deleteLecturer(int id_lecturer){
 		return LecturerDAO.deleteLecturer(id_lecturer);
 	}
+	public static LecturerListView getLecturerViewById(int id) {
+		return LecturerDAO.getLecturerViewById(id);
+	}
 }

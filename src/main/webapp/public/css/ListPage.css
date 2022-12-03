@@ -9,7 +9,12 @@ body {
 			margin: 8px 0 8px 0;
 			display:none;
 		}
-		
+		.navbar {
+		    z-index: 1;
+			position: fixed;
+			width: 100%;
+			top:0;
+		}
 		.search {
 			padding: 6px;
 			border: 1px solid #255783;
@@ -25,11 +30,13 @@ body {
 		.wrapper-content {
 			width:95%;
 			border-top-left-radius: 10px;
-			/* box-shadow: 0 0 50px 2px rgba(1, 1, 1, 0.6); */
-			box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+			/* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
+			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 			margin: auto;
 			background-color: #f2f2f26e;
 			text-align:center;
+			margin-top: 70px;
+			padding-bottom: 24px;
 		}
 		button, input {
 			outline: none;
@@ -37,11 +44,14 @@ body {
 		}
 		/*login*/
 		.wapper-login {
-			height: 100vh;
+			height: 100%;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			background-color: #f2f2f26e;
+		}
+		.wapper-login.size-wrapper {
+			height: 100vh;
 		}
 		.container.login {
 			box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -72,10 +82,12 @@ body {
 		background-color: #fff;
 		width: 500px;
 		min-height: 200px;
+		/* max-height:600px; */
 		max-width: calc(100%-32px);
 		animation: modalFadeIn ease 0.5;
 		border-radius: 10px;
 	}
+	
 	header.modal-header {
 		background: #255783;
 		height: 42px;
@@ -107,6 +119,9 @@ body {
 	}
 	.modal-body {
 		padding: 32px;
+		/*  overflow-y: scroll;
+    scrollbar-width: thin;
+    position: relative; */
 	}
 	.modal-input {
 		border: 1px solid #ccc;
@@ -114,6 +129,8 @@ body {
 		padding: 10px;
 		margin-bottom: 12px;
 		margin-top: 12px;
+		color:#333;
+		font-weight: 500;
 	}
 	.modal-form {
 		margin-top: 12px;
@@ -145,5 +162,38 @@ body {
 		margin-top: 12px;
 		color: #666;
 	}
-		
+	.modal-form-item {
+		display: flex;
+		justify-content: space-between;
+	}
+	/*student*/
+	.size-form {
+		width:50%;
+		margin-top: 64px;
+	}
 	
+	.modal-form-element:first-child {
+		margin-right: 100px;
+	}
+	.wrapper-add-del {
+		display: flex;
+	}
+	.btn-del{
+		 display: flex;
+    	margin-top: 24px;
+    	margin-left: 32px;
+    	height: 32px;
+	}
+	.container.scroll {
+		 overflow-y: scroll;
+    	scrollbar-width: thin;
+	}
+	i.update-icon {
+		font-size: 16px;
+		color: #255783;
+		background: #fff;
+	} 
+	i.update-icon:hover {
+		color: blue;
+		cursor: pointer;
+	}

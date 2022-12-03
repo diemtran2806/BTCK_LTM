@@ -45,6 +45,12 @@ public class LecturerDAO {
 													+ "CCCD like ? or "
 													+ "address like ? or "
 													+ "faculty_name like N? ;";
+		private static final String GET_LECTURER_VIEW_BY_ID = "SELECT id_person, name,  faculty_name, role, phone, email, CCCD, gender, address, dob, img, faculty_name, lecturer_salary "
+				+ "from "
+				+ "(select * from lecturer left join person on lecturer.id_lecturer = person.id_person) as lec "
+				+ "left join faculty on lec.id_faculty = faculty.id_faculty "
+				+ "where "
+				+ "id_person = ?;\r\n";
 //		Thiếu giới tính, ngày sinh
 
 		private static final String DELETE_LECTURER = "DELETE FROM person WHERE id_person = ?;";
@@ -183,5 +189,24 @@ public class LecturerDAO {
 				e.printStackTrace();
 			}
 			return true;
+		}
+		
+		public static LecturerListView getLecturerViewById(int id){
+			try {
+				
+				Connection con = ConnectDatabase.getMySQLConnection();
+				PreparedStatement psLecturer = con.prepareStatement(GET_LECTURER_VIEW_BY_ID);
+				psLecturer.setInt(1, id);
+				System.out.println(psLecturer);
+				ResultSet rs = psLecturer.executeQuery();
+				if(rs.next()) {
+					return new LecturerListView(rs.getInt("id_person"), rs.getString("name"),"",rs.getString("role"),rs.getString("phone"),rs.getString("email"),rs.getString("CCCD"),rs.getBoolean("gender"),rs.getString("address"),rs.getDate("dob"),rs.getString("img"),rs.getString("faculty_name"),rs.getInt("lecturer_salary"));
+				}
+				
+			}
+			catch(Exception ex) {
+				ex.printStackTrace();
+			}
+			return null;
 		}
 }

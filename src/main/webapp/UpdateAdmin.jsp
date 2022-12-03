@@ -6,44 +6,49 @@
 <head>
 <meta charset="UTF-8">
 <title>Update admin</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/ListPage.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/Button.css">
 </head>
 <body>
 	<div class="navbar">
         <jsp:include page="NavigationBar.jsp"></jsp:include>
     </div>
+    <div class="wapper-login">
+    <div class="container login size-form">
+    <header class="modal-header">Cập Nhật Thông Tin Admin</header>
+    <div class="modal-body">
+    <div class="modal-form">
 	<form action="<%=request.getContextPath()%>/Admin/update" method="post">
-		<table>
 			<%
 			AdminView admin = (AdminView) request.getAttribute("admin");
 			%>
-			<tr>
-				<td>ID:</td>
-				<td><input type="text" name="id_person"
-					value="<%=admin.getId_person()%>" readonly /></td>
-			</tr>
-			<tr>
-				<td>Họ tên:</td>
-				<td><input type="text" name="name"
-					value="<%=admin.getName()%>" /></td>
-			</tr>
-			<tr>
-				<td>Số điện thoại:</td>
-				<td><input type="text" name="phone"
-					value="<%=admin.getPhone()%>" /></td>
-			</tr>
-			<tr>
-				<td>Email:</td>
-				<td><input type="text" name="email"
-					value="<%=admin.getEmail()%>" /></td>
-			</tr>
-			<tr>
-				<td>CCCD:</td>
-				<td><input type="text" name="cccd"
-					value="<%=admin.getCCCD()%>" /></td>
-			</tr>
-			<tr>
-				<td>Giới tính:</td>
-				<td><select name="gender">
+			<div class="modal-form-item">
+			<div class="modal-form-element">
+			<label for="id_person" class="modal-label">Mã Admin</label>
+			<br>
+			<input type="text" name="id_person" value="<%=admin.getId_person()%>" class="modal-input" readonly />
+			 </div>
+        	<div class="modal-form-element">
+			<label for="name" class="modal-label">Họ Và Tên</label>
+			<br>
+			<input type="text" name="name" value="<%=admin.getName()%>" class="modal-input" />
+			 </div>
+			  </div>
+			<label for="phone" class="modal-label">SĐT</label>
+			<br>
+			<input type="text" name="phone" value="<%=admin.getPhone()%>" class="modal-input"/>
+			<label for="email" class="modal-label">Email</label>
+			<br>
+			<input type="text" name="email" value="<%=admin.getEmail()%>" class="modal-input"/>
+			<label for="cccd" class="modal-label">CCCD</label>
+			<br>
+			<input type="text" name="cccd" value="<%=admin.getCCCD()%>" class="modal-input"/>
+			<label for="genger" class="modal-label">Giới Tính</label>
+			<br>
+			<select name="gender" class ="modal-option">
 						<%
 						if (!admin.getGender()) {
 						%>
@@ -57,26 +62,24 @@
 						<%
 						}
 						%>
-				</select></td>
-			</tr>
-			<tr>
-				<td>Địa chỉ:</td>
-				<td><input type="text" name="address"
-					value="<%=admin.getAddress()%>" /></td>
-			</tr>
-			<tr>
-				<td>Ngày sinh:</td>
-				<td><input type="date" name="dob" value="<%=admin.getDob()%>" /></td>
-			</tr>
-			<tr>
-				<td>Lớp:</td>
-				<td><input type="text" name="salary" value="<%=admin.getAdmin_salary()%>" /></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Update" /></td>
-				<td><input type="reset" value="Reset" /></td>
-			</tr>
-		</table>
+				</select>
+			<label for="address" class="modal-label">Địa Chỉ</label>
+			<br>
+			<input type="text" name="address" value="<%=admin.getAddress()%>" class="modal-input"/>
+			<label for="date" class="modal-label">Ngày Sinh</label>
+			<br>
+			<input type="date" name="dob" value="<%=admin.getDob()%>" class="modal-input"/>
+			<label for="salary" class="modal-label">Lương</label>
+			<br>
+			<input type="text" name="salary" value="<%=admin.getAdmin_salary()%>" class="modal-input" />
+			<div class="wrapper-btn">
+				<input type="submit" name="submit" value="Update" class="btn" >
+				<input type="reset"id="reset" value="Reset" class="btn">
+			 </div>
 	</form>
+	</div>
+	</div>
+	</div>
+	</div>
 </body>
 </html>

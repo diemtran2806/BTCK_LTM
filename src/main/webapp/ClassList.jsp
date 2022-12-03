@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/Table.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/Button.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/ListPage.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fonts/fontawesome-free-6.2.1/css/all.min.css">
 </head>
 <body>
 	<div class="navbar">
@@ -32,12 +33,12 @@
             <table  class="data" width='100%'>
                 <thead>
                     <tr>
-                        <td>ID Class</td>
-                        <td>Class Name</td>
-                        <td>ID Faculty</td>
-                        <td>Faculty Name</td>
-                        <td>Update</td>
-                        <td>Details</td>
+                        <td>Mã Lớp</td>
+                        <td>Tên Lớp</td>
+                        <td>Mã Khoa</td>
+                        <td>Tên Khoa</td>
+                        <td>Cập Nhật</td>
+                        <td>Chi Tiết</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,8 +57,8 @@
 	                    	<td><%= classView.get(i).getClass_name() %></td>
 	                    	<td><%= classView.get(i).getId_faculty() %></td>
 	                    	<td><%= classView.get(i).getFaculty_name() %></td>
-	                    	<td><a href="./update?update=<%=classView.get(i).getId_class() %>"><button class="btn">Update</button></a>
-	                   		<td><a href="../Class/details?details=<%=classView.get(i).getId_class() %>"><button type="button" class="btn">Chi tiết</button></a>
+	                    	<td><a href="../Class/update?update=<%=classView.get(i).getId_class() %>"><button><i class="update-icon fa-solid fa-pen-to-square"></i></button></a>
+	                   		<td><a href="../Class/details?details=<%=classView.get(i).getId_class() %>"><button type="button"><i class="update-icon fa-solid fa-circle-info"></i></button></a>
 	                   	</tr>
 	                   	<% 
 	                   	}
@@ -66,8 +67,6 @@
 	                   	%>
                 </tbody>
             </table>
-            <!-- <a href="./add"><button class="btn btn-add">Add</button></a> -->
-            <!-- <button id="add" class="btn btn-add">Add</button> -->
             <%
 	              ArrayList<Faculty> faculty = (ArrayList<Faculty>)request.getAttribute("FacultyInfor");
              %>
