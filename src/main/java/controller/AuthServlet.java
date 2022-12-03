@@ -17,10 +17,10 @@ import model.BO.LecturerBO;
 import model.BO.PersonBO;
 
 @WebServlet("/Auth/*")
-public class CheckLoginServlet extends HttpServlet {
+public class AuthServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public CheckLoginServlet() {
+	public AuthServlet() {
 		super();
 	}
 

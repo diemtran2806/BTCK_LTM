@@ -2,7 +2,7 @@
 <<<<<<<=HEAD
 >>>>>>>=1e0b561 (upload img, hash password \u00F0\u009F\u0090\u00BF\u00EF\u00B8\u008F\u00F0\u009F\u0090\u0087)
 eclipse.preferences.version=1
-encoding//src/main/java/controller/CheckLoginServlet.java=UTF-8
+encoding//src/main/java/controller/AuthServlet.java=UTF-8
 encoding//src/main/java/controller/MeServlet.java=UTF-8
 encoding//src/main/java/controller/StudentServlet.java=UTF-8
 encoding//src/main/java/model/BO/PersonBO.java=UTF-8
