@@ -28,6 +28,7 @@ import model.BO.FacultyBO;
 import model.BO.LecturerBO;
 import model.BO.PersonBO;
 import model.BO.StudentBO;
+import utils.PasswordAuthentication;
 
 @WebServlet("/Me/*")
 @MultipartConfig
@@ -174,7 +175,10 @@ public class MeServlet extends HttpServlet {
 		try {
 			int id = Integer.parseInt(request.getParameter("id"));
 			String password = request.getParameter("password");
-			boolean result = PersonBO.updatePassword(id,password);
+			PasswordAuthentication hashPass = new PasswordAuthentication(15);
+			@SuppressWarnings("deprecation")
+			String pass = hashPass.hash(password);
+			boolean result = PersonBO.updatePassword(id,pass);
 			if(result) {
 				RequestDispatcher rd = request.getRequestDispatcher("/");
 				rd.forward(request, response);
