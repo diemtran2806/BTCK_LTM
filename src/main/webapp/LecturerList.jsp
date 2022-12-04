@@ -73,8 +73,14 @@
 						</td>
 						<td>Khoa
 						</td>
+						<%
+						if (session.getAttribute("role") != null && !session.getAttribute("role").equals("student")) {
+						%>
 						<td>Lương
 						</td>
+						<%
+						}
+						%>
 						<%
 						if (session.getAttribute("role") != null && session.getAttribute("role").equals("admin")) {
 						%>
@@ -110,7 +116,13 @@
 						<td><%=lecturerList.get(i).getAddress()%></td>
 						<td><%=lecturerList.get(i).getDob()%></td>
 						<td><%=lecturerList.get(i).getFaculty_name()%></td>
+						<%
+						if (session.getAttribute("role") != null && !session.getAttribute("role").equals("student")) {
+						%>
 						<td><%=lecturerList.get(i).getLecturer_salary()%></td>
+						<%
+						}
+						%>
 						<%
 						if (session.getAttribute("role") != null && session.getAttribute("role").equals("admin")) {
 						%>

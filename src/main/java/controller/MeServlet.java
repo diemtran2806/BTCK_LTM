@@ -173,15 +173,14 @@ public class MeServlet extends HttpServlet {
 	
 	private void changePassword(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			int id = Integer.parseInt(request.getParameter("id"));
+			int id = (int) request.getSession(false).getAttribute("id");
 			String password = request.getParameter("password");
 			PasswordAuthentication hashPass = new PasswordAuthentication(15);
 			@SuppressWarnings("deprecation")
 			String pass = hashPass.hash(password);
 			boolean result = PersonBO.updatePassword(id,pass);
 			if(result) {
-				RequestDispatcher rd = request.getRequestDispatcher("/");
-				rd.forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/");
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

@@ -79,7 +79,7 @@
 						<%
 						if (session.getAttribute("role") != null && session.getAttribute("role").equals("admin")) {
 						%>
-						<td><input type="checkbox" name="delete"
+						<td><input type="checkbox" name="delete" class="delete"
 							value="<%=studentList.get(i).getId_person()%>"></td>
 						<%
 						}
@@ -174,7 +174,7 @@
 		</div>
 	</div>
 	<script>
-		let checkall = document.getElementById("checkAll");
+		const checkall = document.getElementById("checkAll");
 		const checkbox = document.getElementsByClassName("delete");
 		checkall.onclick = function() {
 			if (checkall.checked) {

@@ -60,10 +60,10 @@
 						<th>Giới Tính</th>
 						<th>Địa Chỉ</th>
 						<th>Ngày Sinh</th>
-						<th>Lương</th>
 						<%
 						if (session.getAttribute("role") != null && session.getAttribute("role").equals("admin")) {
 						%>
+						<th>Lương</th>
 						<th>Cập Nhật</th>
 						<th>Xóa</th>
 						<%
@@ -80,7 +80,7 @@
 						<%
 						if (session.getAttribute("role") != null && session.getAttribute("role").equals("admin")) {
 						%>
-						<td><input type="checkbox" name="delete"
+						<td><input type="checkbox" name="delete" class="delete"
 							value="<%=adminList.get(i).getId_person()%>"></td>
 						<%
 						}
@@ -95,10 +95,10 @@
 						<td><%=adminList.get(i).getGender()%></td>
 						<td><%=adminList.get(i).getAddress()%></td>
 						<td><%=adminList.get(i).getDob()%></td>
-						<td><%=adminList.get(i).getAdmin_salary()%></td>
 						<%
 						if (session.getAttribute("role") != null && session.getAttribute("role").equals("admin")) {
 						%>
+						<td><%=adminList.get(i).getAdmin_salary()%></td>
 						<td><a
 							href="<%=request.getContextPath()%>/Admin/update?id=<%=adminList.get(i).getId_person()%>"><button
 									type="button">

@@ -53,6 +53,16 @@ public class StudentServlet extends HttpServlet {
 			case "/update":
 				viewFormUpdate(request, response);
 				break;
+			case "/delete":
+				boolean res = PersonBO.deletePerson(Integer.parseInt(request.getParameter("id")));
+//				System.out.println(res);
+				if (res) {
+					response.sendRedirect("./viewlist");
+				} else {
+					request.setAttribute("error", "Something went wrong!");
+					response.sendRedirect("./viewlist");
+				}
+				break;
 			}
 		} catch (Exception ex) {
 			throw new ServletException(ex);
@@ -80,14 +90,7 @@ public class StudentServlet extends HttpServlet {
 			case "/update":
 				update(request, response);
 				break;
-			case "/delete":
-				if (PersonBO.deletePerson(Integer.parseInt(request.getParameter("id")))) {
-					response.sendRedirect("./viewlist");
-				} else {
-					request.setAttribute("error", "Something went wrong!");
-					response.sendRedirect("./viewlist");
-				}
-				break;
+			
 			case "/deleteMany":
 				deleteMany(request, response);
 				break;
